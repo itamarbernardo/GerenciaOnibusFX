@@ -215,7 +215,9 @@ public class FachadaFuncionario {
         return viagem.listaPoltronas();
     }
     
-    public void adicionarPassageiro(Passageiro passageiro) throws PassageiroJaExisteException, PassageiroNaoExisteException{
+    public void adicionarPassageiro(String nomeCompleto, String cpf, String rg, String telefone, String dataNascimento, boolean possuiIdJovem) throws PassageiroJaExisteException, PassageiroNaoExisteException{
+        Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
+        
         if(passageiro == null){
             negocioPassageiro.adicionarPassageiro(passageiro);
         }
@@ -224,20 +226,38 @@ public class FachadaFuncionario {
         }
     }
     
-    public void alterarPassageiro(Passageiro passageiro) throws PassageiroNaoExisteException{
+    public void alterarPassageiro(String cpf, String nomeCompleto, String rg, String telefone,String dataNascimento, boolean possuiIdJovem) throws PassageiroNaoExisteException{
+        Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
+        
         if(passageiro == null){
             throw new PassageiroNaoExisteException();
         }
         else{
             negocioPassageiro.alterarPassageiro(passageiro);
         }
+        
+        passageiro.setNomeCompleto(nomeCompleto);
+        passageiro.setCpf(cpf);
+        passageiro.setRg(rg);        
+        passageiro.setTelefone(telefone);
+        passageiro.setDataNascimento(dataNascimento);  
+        passageiro.setPossuiIdJovem(possuiIdJovem);
     }
     
-    public Passageiro procurarPassageiro(Passageiro passageiro){
-        return negocioPassageiro.procurarPassageiro(passageiro.getCpf());
+    public Passageiro procurarPassageiro(String cpf) throws PassageiroNaoExisteException{
+        Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
+        
+        if(passageiro == null){
+            throw new PassageiroNaoExisteException();
+        }
+        else{
+            return negocioPassageiro.procurarPassageiro(cpf);
+        }
     }
     
     public void removerPassageiro(Passageiro passageiro) throws PassageiroNaoExisteException{
+        passageiro = negocioPassageiro.procurarPassageiro(passageiro.getCpf());
+        
         if(passageiro == null){
             throw new PassageiroNaoExisteException();
         }
