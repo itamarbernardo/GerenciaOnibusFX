@@ -47,12 +47,12 @@ import java.util.logging.Logger;
 public class FachadaGerente extends FachadaFuncionario {
 
     private static FachadaGerente fachadaGerente;
-   
+    protected NegocioMotorista negocioMotorista; 
 
     
-    private FachadaGerente() {
+    protected FachadaGerente() {
         super();
-       
+        this.negocioMotorista = new NegocioMotorista(); 
     }
 
     public static FachadaGerente getFachadaGerente() {
@@ -156,6 +156,7 @@ public class FachadaGerente extends FachadaFuncionario {
     
     public void alterarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista, Endereco endereco) throws MotoristaNaoExisteException{
         Motorista motorista = negocioMotorista.procurarMotorista(numeroCarteiraMotorista); 
+        
         if(motorista == null){
             throw new MotoristaNaoExisteException(); 
         }
@@ -166,4 +167,58 @@ public class FachadaGerente extends FachadaFuncionario {
         motorista.setEndereco(endereco);
     }
     
+    public void adicionarFuncioanario(String cpf) throws FuncionarioJaExisteException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        
+        if(funcionario == null){
+            negocioFuncionario.adicionarFuncionario(funcionario);
+        }
+        else{
+            throw new FuncionarioJaExisteException();
+        }
+        
+    }
+    
+    public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, Endereco endereco) throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        
+        if(funcionario == null){
+            throw new FuncionarioNaoEncontradoException();
+        }
+        else{
+            negocioFuncionario.alterarFuncionario(funcionario);
+        }
+        
+        funcionario.setNomeCompleto(nomeCompleto);
+        funcionario.setCpf(cpf);
+        funcionario.setRg(rg);
+        funcionario.setTelefone(telefone);
+        funcionario.setEndereco(endereco);
+        funcionario.setEmail(email);
+        funcionario.seteGerente(eGerente);
+        funcionario.setSenha(senha);
+    }
+    
+    public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        
+        if(funcionario == null){
+            throw new FuncionarioNaoEncontradoException();
+        }
+        else{
+            return negocioFuncionario.procurarFuncionario(cpf);
+        }
+    }
+    
+    public void removerFuncionario(Funcionario funcionario) throws FuncionarioNaoEncontradoException{
+        funcionario = negocioFuncionario.procurarFuncionario(funcionario.getCpf());
+        
+        if(funcionario == null){
+            throw new FuncionarioNaoEncontradoException();
+        }
+        else{
+            negocioFuncionario.removerFuncionario(funcionario);
+        }
+    }
 }
+
