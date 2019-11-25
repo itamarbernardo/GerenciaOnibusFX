@@ -18,13 +18,11 @@ import br.uag.ufrpe.negocio.entidades.Onibus;
 import br.uag.ufrpe.negocio.entidades.Passageiro;
 import br.uag.ufrpe.negocio.entidades.Passagem;
 import br.uag.ufrpe.negocio.entidades.Viagem;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
 import br.uag.ufrpe.negocio.excecoes.datas.IntervaloDeDatasInvalidoException;
 import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
-import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaNaoDisponivelException;
 import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaJaExisteException;
+import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaNaoDisponivelException;
 import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.onibus.OnibusCheioException;
 import br.uag.ufrpe.negocio.excecoes.onibus.OnibusJaExisteException;
@@ -34,6 +32,8 @@ import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemExceptio
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoPertenceAViagemException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemNaoExisteException;
 import java.util.List;
@@ -47,12 +47,12 @@ import java.util.logging.Logger;
 public class FachadaGerente extends FachadaFuncionario {
 
     private static FachadaGerente fachadaGerente;
-    protected NegocioMotorista negocioMotorista; 
+   
 
     
-    protected FachadaGerente() {
+    private FachadaGerente() {
         super();
-        this.negocioMotorista = new NegocioMotorista(); 
+       
     }
 
     public static FachadaGerente getFachadaGerente() {
@@ -140,7 +140,8 @@ public class FachadaGerente extends FachadaFuncionario {
     }
 
   
-    public void adicionarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista, Endereco endereco) throws MotoristaJaExisteException{
+    public void adicionarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista,String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws MotoristaJaExisteException{
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
         Motorista carteira = negocioMotorista.procurarMotorista(numeroCarteiraMotorista);
         if(carteira != null){
                throw new MotoristaJaExisteException(); 
@@ -154,9 +155,9 @@ public class FachadaGerente extends FachadaFuncionario {
         
     }
     
-    public void alterarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista, Endereco endereco) throws MotoristaNaoExisteException{
+    public void alterarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws MotoristaNaoExisteException{
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
         Motorista motorista = negocioMotorista.procurarMotorista(numeroCarteiraMotorista); 
-        
         if(motorista == null){
             throw new MotoristaNaoExisteException(); 
         }
@@ -220,5 +221,5 @@ public class FachadaGerente extends FachadaFuncionario {
             negocioFuncionario.removerFuncionario(funcionario);
         }
     }
+    
 }
-
