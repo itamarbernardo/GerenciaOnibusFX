@@ -168,11 +168,13 @@ public class FachadaGerente extends FachadaFuncionario {
         motorista.setEndereco(endereco);
     }
     
-    public void adicionarFuncioanario(String cpf) throws FuncionarioJaExisteException{
+    public void adicionarFuncioanario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException{
         Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
         
         if(funcionario == null){
             negocioFuncionario.adicionarFuncionario(funcionario);
+            Funcionario func = new Funcionario(nomeCompleto, cpf, rg, telefone, senha, email, eGerente, endereco);
         }
         else{
             throw new FuncionarioJaExisteException();
@@ -180,8 +182,9 @@ public class FachadaGerente extends FachadaFuncionario {
         
     }
     
-    public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, Endereco endereco) throws FuncionarioNaoEncontradoException{
+    public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioNaoEncontradoException{
         Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
         
         if(funcionario == null){
             throw new FuncionarioNaoEncontradoException();
