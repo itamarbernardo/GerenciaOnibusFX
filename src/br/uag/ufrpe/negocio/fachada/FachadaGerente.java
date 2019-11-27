@@ -8,7 +8,6 @@ package br.uag.ufrpe.negocio.fachada;
 import br.uag.ufrpe.negocio.NegocioFuncionario;
 import br.uag.ufrpe.negocio.NegocioMotorista;
 import br.uag.ufrpe.negocio.NegocioOnibus;
-import br.uag.ufrpe.negocio.NegocioPassageiro;
 import br.uag.ufrpe.negocio.NegocioPassagem;
 import br.uag.ufrpe.negocio.NegocioViagem;
 import br.uag.ufrpe.negocio.entidades.Endereco;
@@ -173,47 +172,51 @@ public class FachadaGerente extends FachadaFuncionario {
         motorista.setEndereco(endereco);
     }
 
-    public void adicionarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException {
-        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf);
-        Endereco endereco = new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado);
-
-        if (funcionario == null) {
-            getNegocioFuncionario().adicionarFuncionario(funcionario);
-            Funcionario func = new Funcionario(nomeCompleto, cpf, rg, telefone, senha, email, eGerente, endereco);
-        } else {
-            throw new FuncionarioJaExisteException();
+    public void adicionarFuncioanario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException, FuncionarioNaoEncontradoException{
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
+        Funcionario funcionario = new Funcionario(nomeCompleto, cpf, rg, telefone, senha, email, eGerente, endereco);
+        
+        if(procurarFuncionario(funcionario.getCpf()) == null){
+            negocioFuncionario.adicionarFuncionario(funcionario);    
         }
-
+        else{
+            throw new FuncionarioJaExisteException();   
+              
+        }
+        
     }
 
-    public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioNaoEncontradoException {
-        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf);
-        Endereco endereco = new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado);
-
-        if (funcionario == null) {
+    public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
+        
+        if(funcionario == null){
             throw new FuncionarioNaoEncontradoException();
-        } else {
-            getNegocioFuncionario().alterarFuncionario(funcionario);
         }
-
+        else{
+            negocioFuncionario.alterarFuncionario(funcionario);
+        }
+        
         funcionario.setNomeCompleto(nomeCompleto);
         funcionario.setCpf(cpf);
         funcionario.setRg(rg);
         funcionario.setTelefone(telefone);
-        funcionario.setEndereco(endereco);
         funcionario.setEmail(email);
         funcionario.seteGerente(eGerente);
         funcionario.setSenha(senha);
+        funcionario.getEndereco().setCep(cep);
+        funcionario.getEndereco().setLogradouro(logradouro);
+        funcionario.getEndereco().setBairro(bairro);
+        funcionario.getEndereco().setNumero(numero);
+        funcionario.getEndereco().setComplemento(complemento);
+        funcionario.getEndereco().setCidade(cidade);
+        funcionario.getEndereco().setEstado(estado);
     }
 
-    public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException {
-        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf);
 
-        if (funcionario == null) {
-            throw new FuncionarioNaoEncontradoException();
-        } else {
-            return getNegocioFuncionario().procurarFuncionario(cpf);
-        }
+    public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        return negocioFuncionario.procurarFuncionario(cpf);
     }
 
     public void removerFuncionario(Funcionario funcionario) throws FuncionarioNaoEncontradoException {
