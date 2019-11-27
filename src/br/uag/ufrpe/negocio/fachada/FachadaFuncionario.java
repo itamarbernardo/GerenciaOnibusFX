@@ -34,20 +34,17 @@ public class FachadaFuncionario {
 
     private static FachadaFuncionario fachadaFuncionario;
     
-    protected NegocioViagem negocioViagem;
-    protected NegocioOnibus negocioOnibus;
-    protected NegocioPassagem negocioPassagem;
-    protected NegocioPassageiro negocioPassageiro;
-    protected NegocioFuncionario negocioFuncionario;
-    protected NegocioMotorista negocioMotorista;
-
+    private NegocioViagem negocioViagem;
+    private NegocioPassagem negocioPassagem;
+    private NegocioPassageiro negocioPassageiro;
+    private NegocioFuncionario negocioFuncionario;
+    
     FachadaFuncionario() {
         this.negocioViagem = new NegocioViagem();
-        this.negocioOnibus = new NegocioOnibus();
         this.negocioPassagem = new NegocioPassagem();
         this.negocioPassageiro = new NegocioPassageiro();
         this.negocioFuncionario = new NegocioFuncionario();
-        this.negocioMotorista = new NegocioMotorista();
+    
     }
 
     
@@ -58,6 +55,23 @@ public class FachadaFuncionario {
         }
         return fachadaFuncionario;
     }
+
+    public NegocioViagem getNegocioViagem() {
+        return negocioViagem;
+    }
+
+    public NegocioPassagem getNegocioPassagem() {
+        return negocioPassagem;
+    }
+
+    public NegocioPassageiro getNegocioPassageiro() {
+        return negocioPassageiro;
+    }
+
+    public NegocioFuncionario getNegocioFuncionario() {
+        return negocioFuncionario;
+    }
+    
     
     
     public Viagem procurarViagem(int codigo) {
