@@ -219,12 +219,13 @@ public class FachadaGerente extends FachadaFuncionario {
         return negocioFuncionario.procurarFuncionario(cpf);
     }
 
-    public void removerFuncionario(Funcionario funcionario) throws FuncionarioNaoEncontradoException {
-        funcionario = getNegocioFuncionario().procurarFuncionario(funcionario.getCpf());
+    public void removerFuncionario(String cpf) throws FuncionarioNaoEncontradoException {
+        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf));
 
         if (funcionario == null) {
             throw new FuncionarioNaoEncontradoException();
-        } else {
+        } 
+        else {
             getNegocioFuncionario().removerFuncionario(funcionario);
         }
     }
