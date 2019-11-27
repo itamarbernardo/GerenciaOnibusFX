@@ -37,7 +37,7 @@ public class FachadaFuncionario {
     private NegocioViagem negocioViagem;
     private NegocioPassagem negocioPassagem;
     private NegocioPassageiro negocioPassageiro;
-    private NegocioFuncionario negocioFuncionario;
+    NegocioFuncionario negocioFuncionario;
     
     FachadaFuncionario() {
         this.negocioViagem = new NegocioViagem();
@@ -230,9 +230,9 @@ public class FachadaFuncionario {
     }
     
     public void adicionarPassageiro(String nomeCompleto, String cpf, String rg, String telefone, String dataNascimento, boolean possuiIdJovem) throws PassageiroJaExisteException, PassageiroNaoExisteException{
-        Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
+        Passageiro passageiro = new Passageiro(nomeCompleto, cpf, rg, telefone, dataNascimento, possuiIdJovem);
         
-        if(passageiro == null){
+        if(procurarPassageiro(passageiro.getCpf()) == null){
             negocioPassageiro.adicionarPassageiro(passageiro);
         }
         else{
@@ -246,10 +246,7 @@ public class FachadaFuncionario {
         if(passageiro == null){
             throw new PassageiroNaoExisteException();
         }
-        else{
-            negocioPassageiro.alterarPassageiro(passageiro);
-        }
-        
+                
         passageiro.setNomeCompleto(nomeCompleto);
         passageiro.setCpf(cpf);
         passageiro.setRg(rg);        
@@ -260,13 +257,8 @@ public class FachadaFuncionario {
     
     public Passageiro procurarPassageiro(String cpf) throws PassageiroNaoExisteException{
         Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
+        return negocioPassageiro.procurarPassageiro(cpf);
         
-        if(passageiro == null){
-            throw new PassageiroNaoExisteException();
-        }
-        else{
-            return negocioPassageiro.procurarPassageiro(cpf);
-        }
     }
     
     public void removerPassageiro(Passageiro passageiro) throws PassageiroNaoExisteException{
