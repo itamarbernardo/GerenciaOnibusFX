@@ -151,7 +151,12 @@ public class FachadaGerente extends FachadaFuncionario {
     }
     
     public void removerMotorista(String numeroCarteiraMotorista) throws MotoristaNaoExisteException{
-        negocioMotorista.removerMotorista(numeroCarteiraMotorista);
+        Motorista m = negocioMotorista.procurarMotorista(numeroCarteiraMotorista);
+        
+        if(m == null){
+            throw new MotoristaNaoExisteException();
+        }
+        negocioMotorista.removerMotorista(m);
         
     }
     
@@ -168,7 +173,7 @@ public class FachadaGerente extends FachadaFuncionario {
         motorista.setEndereco(endereco);
     }
     
-    public void adicionarFuncioanario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException{
+    public void adicionarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException{
         Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
         Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
         

@@ -53,8 +53,8 @@ public class NegocioMotorista {
       }    
   }
  
-  public Motorista procurarMotorista(Motorista m){ 
-      return repositorio.procurarMotorista(m.getNumeroCarteiraMotorista()); 
+  public Motorista procurarMotorista(String numeroCarteiraMotorista){ 
+      return repositorio.procurarMotorista(numeroCarteiraMotorista); 
   }
   
 }
