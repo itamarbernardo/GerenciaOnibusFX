@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="225.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro Funcionario">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Label layoutX="13.0" layoutY="70.0" text="Nome">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="102.0" text="CPF">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="139.0" text="RG">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="176.0" text="Telefone">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="214.0" text="Senha de acesso">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="254.0" text="Email">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="295.0" text="Gerente">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="70.0" text="CEP">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="115.0" layoutY="66.0" />
+      <TextField layoutX="115.0" layoutY="98.0" />
+      <TextField layoutX="115.0" layoutY="135.0" />
+      <TextField layoutX="115.0" layoutY="172.0" />
+      <TextField layoutX="115.0" layoutY="250.0" />
+      <Group>
+         <children>
+            <RadioButton layoutX="182.0" layoutY="296.0" mnemonicParsing="false" text="Não">
+               <toggleGroup>
+                  <ToggleGroup fx:id="eGerente" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="121.0" layoutY="296.0" mnemonicParsing="false" text="Sim" toggleGroup="$eGerente" />
+         </children>
+      </Group>
+      <TextField layoutX="403.0" layoutY="66.0" promptText="XXXXX-XXX" />
+      <Label layoutX="315.0" layoutY="102.0" text="Logradouro">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="99.0" />
+      <Label layoutX="315.0" layoutY="138.0" text="Bairro">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="136.0" />
+      <Label layoutX="315.0" layoutY="176.0" text="Numero">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="173.0" promptText="Ex: 101, 200" />
+      <Label layoutX="315.0" layoutY="214.0" text="Complemento">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="210.0" promptText="Ex: Predio, casa" />
+      <Label layoutX="315.0" layoutY="254.0" text="Cidade">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="250.0" />
+      <Label layoutX="315.0" layoutY="287.0" text="Estado (UF)">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField layoutX="403.0" layoutY="284.0" prefHeight="25.0" prefWidth="35.0" />
+      <PasswordField layoutX="115.0" layoutY="211.0" />
+   </children>
+</Pane>

@@ -6,9 +6,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.AlterarViagemController">
+<AnchorPane id="AnchorPane" prefHeight="469.0" prefWidth="598.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.AlterarViagemController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#alterarViagem" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <Button fx:id="procurarViagem" layoutX="388.0" layoutY="396.0" onAction="#procurarViagem" text="Procurar" />
+      <TextField fx:id="txtPlacaOnibus" layoutX="151.0" layoutY="88.0" />
+      <Label layoutX="23.0" layoutY="92.0" text="Placa do Ônibus" />
+      <Label layoutX="23.0" layoutY="129.0" text="Origem" />
+      <Label layoutX="23.0" layoutY="163.0" text="Destino" />
+      <TextField fx:id="txtOrigem" layoutX="151.0" layoutY="125.0" />
+      <TextField fx:id="txtDestino" layoutX="151.0" layoutY="159.0" />
+      <Label layoutX="23.0" layoutY="203.0" text="Data de Saída" />
+      <Label layoutX="23.0" layoutY="237.0" text="Horário de Saída" />
+      <DatePicker fx:id="dateSaida" layoutX="151.0" layoutY="199.0" />
+      <TextField fx:id="txtHSaida" layoutX="151.0" layoutY="233.0" />
+      <Label layoutX="23.0" layoutY="273.0" text="Data de Chegada" />
+      <Label layoutX="23.0" layoutY="310.0" text="Horário de Chegada" />
+      <DatePicker fx:id="dateChegada" layoutX="151.0" layoutY="269.0" />
+      <TextField fx:id="txtHChegada" layoutX="151.0" layoutY="306.0" />
+      <Label fx:id="txtTitulo" layoutX="153.0" layoutY="22.0" prefHeight="40.0" prefWidth="276.0" text="                      Procurar/Alterar de Viagens " />
+      <Label fx:id="erroPlaca" layoutX="318.0" layoutY="92.0" textFill="#ee0808" />
+      <Label fx:id="erroDatasHoras" layoutX="338.0" layoutY="273.0" textFill="#f50505" />
+      <Label fx:id="erroHoraSaida" layoutX="311.0" layoutY="237.0" textFill="#f50505" />
+      <Label fx:id="erroHoraChegada" layoutX="311.0" layoutY="310.0" textFill="#f20404" />
+      <Button fx:id="alterarViagem" onAction="#alterarViagem" layoutX="466.0" layoutY="396.0" mnemonicParsing="false" text="Alterar" />
+      <Label layoutX="23.0" layoutY="62.0" text="Código da Viagem" />
+      <TextField fx:id="txtCodigoViagem" layoutX="151.0" layoutY="58.0" />
+      <Label fx:id="erroCodigo" layoutX="311.0" layoutY="62.0" textFill="#fc0707" />
     </children>
 </AnchorPane>
