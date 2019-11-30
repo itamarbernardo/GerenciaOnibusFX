@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
  *
  * @author miyyu
  */
-public class TelaGerenciarOnibusController implements Initializable {
+public class CadastrarOnibusController implements Initializable {
 
     @FXML
     private ComboBox<?> Motoristas;
@@ -42,6 +42,10 @@ public class TelaGerenciarOnibusController implements Initializable {
         PlacaOnibus.getText();        
         TotalPoltronas.getText();
 
+    }
+
+    @FXML
+    private void Voltar(ActionEvent event) {
     }
     
 }
