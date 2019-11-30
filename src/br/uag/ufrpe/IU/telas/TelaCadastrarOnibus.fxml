@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.telas.TelaGerenciarOnibusController">
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.CadastrarOnibusController">
    <children>
       <Label layoutX="218.0" layoutY="20.0" text="Cadastro de Onibus">
          <font>
