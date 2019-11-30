@@ -20,6 +20,7 @@ import br.uag.ufrpe.negocio.excecoes.onibus.OnibusCheioException;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemException;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
+import br.uag.ufrpe.negocio.excecoes.passagem.PassagemJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoPertenceAViagemException;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemNaoExisteException;
@@ -270,6 +271,63 @@ public class FachadaFuncionario {
         else{
             negocioPassageiro.removerPassageiro(passageiro);
         }
+    }
+    
+    public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemJaExisteException{
+        Passagem passagem = new Passagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem, lanche, criancaColo);
+        
+        if(procurarPassagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem,  lanche, criancaColo) == null){
+            negocioPassagem.adicionarPassagem(passagem);
+            return passagem.getCodigo();
+        }
+        
+         throw new PassagemJaExisteException();
+
+    }
+
+    public Passagem procurarPassagem(int codigoPassagem){
+        
+       return negocioPassagem.procurarPassagem(codigoPassagem);
+    }
+    
+    public void alterarPassagem(int codigoPassagem, Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemNaoExisteException{
+        Passagem passagem = negocioPassagem.procurarPassagem(codigoPassagem);
+        
+        if(passagem == null){
+            throw new PassagemNaoExisteException(); 
+        }
+        
+        passagem.setPassageiro(passageiro);
+        passagem.setPreco(preco);
+        passagem.seteDentroDoEstado(eDentroDoEstado);
+        passagem.setCodigoPoltrona(codigoPoltrona);
+        passagem.setTipoDeAssento(tipoDeAssento);
+        passagem.setTipoDePassagem(tipoDePassagem);
+        passagem.setLanche(lanche);
+        passagem.setCriancaColo(criancaColo);
+       
+    }
+    
+    /*public void removerPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemNaoExisteException{
+        //Passagem passagem = negocioPassagem.procurarPassagem(passagem);
+        
+        if(passagem != null){
+            passagem = negocioPassagem.removerPassagem(passagem);
+            
+        }
+        
+        throw new PassagemNaoExisteException();
+    }*/
+    
+    public void removerPassagem(int codigoPassagem) throws PassagemNaoExisteException{
+        Passagem passagem = negocioPassagem.procurarPassagem(codigoPassagem);
+        
+        if(passagem == null){
+            
+            throw new PassagemNaoExisteException();
+        }
+        negocioPassagem.removerPassagem(codigoPassagem);
+        
     }
 
 
