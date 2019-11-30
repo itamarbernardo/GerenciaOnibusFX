@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.UI.controladores.CadastrarFuncionarioController">
    <children>
       <Text layoutX="225.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro Funcionario">
          <font>
@@ -54,58 +54,65 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="115.0" layoutY="66.0" />
-      <TextField layoutX="115.0" layoutY="98.0" />
-      <TextField layoutX="115.0" layoutY="135.0" />
-      <TextField layoutX="115.0" layoutY="172.0" />
-      <TextField layoutX="115.0" layoutY="250.0" />
+      <TextField fx:id="labelFuncionarioNome" layoutX="115.0" layoutY="66.0" />
+      <TextField fx:id="labelFuncionarioCpf" layoutX="115.0" layoutY="98.0" promptText="XXX-XXX-XXX-XX" />
+      <TextField fx:id="labelFuncionarioRg" layoutX="115.0" layoutY="135.0" />
+      <TextField fx:id="labelFuncionarioTelefone" layoutX="115.0" layoutY="172.0" promptText="(XX) X XXXX-XXXX" />
+      <TextField fx:id="labelFuncionarioEmail" layoutX="115.0" layoutY="250.0" promptText="example@gmail.com" />
       <Group>
          <children>
-            <RadioButton layoutX="182.0" layoutY="296.0" mnemonicParsing="false" text="Não">
+            <RadioButton fx:id="labelFuncionarioeGerente" layoutX="182.0" layoutY="296.0" mnemonicParsing="false" text="Não">
                <toggleGroup>
                   <ToggleGroup fx:id="eGerente" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="121.0" layoutY="296.0" mnemonicParsing="false" text="Sim" toggleGroup="$eGerente" />
+            <RadioButton fx:id="labelFuncionarioeGerente" layoutX="121.0" layoutY="296.0" mnemonicParsing="false" text="Sim" toggleGroup="$eGerente" />
          </children>
       </Group>
-      <TextField layoutX="403.0" layoutY="66.0" promptText="XXXXX-XXX" />
+      <TextField fx:id="labelFuncionarioCep" layoutX="403.0" layoutY="66.0" promptText="XXXXX-XXX" />
       <Label layoutX="315.0" layoutY="102.0" text="Logradouro">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="99.0" />
+      <TextField fx:id="labelFuncionarioLogradouro" layoutX="403.0" layoutY="99.0" />
       <Label layoutX="315.0" layoutY="138.0" text="Bairro">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="136.0" />
+      <TextField fx:id="labelFuncionarioBairro" layoutX="403.0" layoutY="136.0" />
       <Label layoutX="315.0" layoutY="176.0" text="Numero">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="173.0" promptText="Ex: 101, 200" />
+      <TextField fx:id="labelFuncionarioNumero" layoutX="403.0" layoutY="173.0" promptText="Ex: 101, 200" />
       <Label layoutX="315.0" layoutY="214.0" text="Complemento">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="210.0" promptText="Ex: Predio, casa" />
+      <TextField fx:id="labelFuncionarioComplemento" layoutX="403.0" layoutY="210.0" promptText="Ex: Predio, casa" />
       <Label layoutX="315.0" layoutY="254.0" text="Cidade">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="250.0" />
+      <TextField fx:id="labelFuncionarioCidade" layoutX="403.0" layoutY="250.0" />
       <Label layoutX="315.0" layoutY="287.0" text="Estado (UF)">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="284.0" prefHeight="25.0" prefWidth="35.0" />
-      <PasswordField layoutX="115.0" layoutY="211.0" />
+      <TextField fx:id="labelFuncionarioEstado" layoutX="403.0" layoutY="284.0" prefHeight="25.0" prefWidth="35.0" />
+      <PasswordField fx:id="labelFuncionarioSenha" layoutX="115.0" layoutY="211.0" />
+      <Button fx:id="cadastrarFuncionario" layoutX="259.0" layoutY="340.0" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="34.0" prefWidth="82.0" text="Cadastrar" />
+      <Label fx:id="erroCpf" layoutX="264.0" layoutY="103.0" prefHeight="17.0" prefWidth="17.0" textFill="RED" />
+      <Label fx:id="erroRg" layoutX="267.0" layoutY="139.0" textFill="RED" />
+      <Label fx:id="erroSenha" layoutX="266.0" layoutY="215.0" prefHeight="17.0" prefWidth="17.0" textFill="RED" />
+      <Label fx:id="erroEmail" layoutX="267.0" layoutY="255.0" prefHeight="17.0" prefWidth="17.0" textFill="RED" />
+      <Label fx:id="erroCep" layoutX="552.0" layoutY="71.0" textFill="RED" />
+      <Label fx:id="erroNumero" layoutX="552.0" layoutY="177.0" textFill="RED" />
    </children>
 </Pane>
