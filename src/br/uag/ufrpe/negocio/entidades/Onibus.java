@@ -84,8 +84,8 @@ public class Onibus{
         return poltronas;
     }
 
-    public void setPoltronas(Map<Integer, String> poltronas) {
-        this.poltronas = poltronas;
+    public void setPoltronas(List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) {
+        this.poltronas = inicializaPoltronas(poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
     }
 
     public int getTotalPoltronas() {

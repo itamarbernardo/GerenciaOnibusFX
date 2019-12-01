@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.telas.TelaGerenciarOnibusController">
+<AnchorPane id="AnchorPane" prefHeight="679.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.CadastrarOnibusController">
    <children>
       <Label layoutX="218.0" layoutY="20.0" text="Cadastro de Onibus">
          <font>
@@ -46,11 +46,11 @@
         </rowConstraints>
          <children>
             <Label text="Motorista" />
-            <ComboBox fx:id="Motoristas" prefHeight="29.0" prefWidth="324.0" GridPane.columnIndex="1" />
             <Label text="Placa" GridPane.rowIndex="1" />
             <TextField fx:id="PlacaOnibus" prefHeight="29.0" prefWidth="148.0" promptText="XXX-XXXX" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Total de Poltronas" GridPane.rowIndex="2" />
             <TextField fx:id="TotalPoltronas" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="motorista" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="64.0" layoutY="597.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
