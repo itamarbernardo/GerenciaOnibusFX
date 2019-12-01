@@ -247,5 +247,9 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
             getNegocioFuncionario().removerFuncionario(funcionario);
         }
     }
+    
+    public List<Funcionario> listagemFuncionarios() {
+        return negocioFuncionario.listagemFuncionarios();
+    }
 
 }
