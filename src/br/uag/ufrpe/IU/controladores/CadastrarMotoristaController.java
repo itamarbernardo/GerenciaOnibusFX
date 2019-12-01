@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -180,7 +181,7 @@ public class CadastrarMotoristaController implements Initializable {
         
         if (verifica) {
             try {
-                fachadaGerente.adicionarMotorista(complemento, cpf, rg, telefone, numero, cep, logradouro, bairro, numero, complemento, cidade, estado);
+                fachadaGerente.adicionarMotorista(nome,cpf,rg,telefone,cnh,cep,logradouro,bairro,numero,complemento,cidade,estado);
                 alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
                 alertaConfirmacao.setContentText("Funcionario cadastradado com sucesso!");
                 alertaConfirmacao.show();
