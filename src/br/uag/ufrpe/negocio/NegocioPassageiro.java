@@ -6,6 +6,7 @@ import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaExisteException;
 
 import br.uag.ufrpe.dados.IRepositorioPassageiro;
 import br.uag.ufrpe.dados.RepositorioPassageiro;
+import java.util.List;
 
 /**
  *
@@ -52,6 +53,9 @@ public class NegocioPassageiro{
             throw new PassageiroNaoExisteException();
         }
     }
-
+    
+    public List<Passageiro> listagemPassageiros() {
+        return repositorio.listagemPassageiros();
+    }
    
 }
