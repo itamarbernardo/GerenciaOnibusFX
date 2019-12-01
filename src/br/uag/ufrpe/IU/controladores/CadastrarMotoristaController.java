@@ -183,7 +183,7 @@ public class CadastrarMotoristaController implements Initializable {
             try {
                 fachadaGerente.adicionarMotorista(nome,cpf,rg,telefone,cnh,cep,logradouro,bairro,numero,complemento,cidade,estado);
                 alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                alertaConfirmacao.setContentText("Funcionario cadastradado com sucesso!");
+                alertaConfirmacao.setContentText("Motorista cadastradado com sucesso!");
                 alertaConfirmacao.show();
 
             } 
