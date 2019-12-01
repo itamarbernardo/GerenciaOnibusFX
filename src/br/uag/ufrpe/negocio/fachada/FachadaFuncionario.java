@@ -241,15 +241,20 @@ public class FachadaFuncionario {
         }
     }
     
-    public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemJaExisteException{
-        Passagem passagem = new Passagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem, lanche, criancaColo);
+    public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
+        Passageiro verificaPassageiro;
+        verificaPassageiro = procurarPassageiro(passageiro.getCpf());
         
-        if(procurarPassagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem,  lanche, criancaColo) == null){
+        if(verificaPassageiro == null){
+            throw new PassageiroNaoExisteException();
+        }
+        else{
+        
+            Passagem passagem = new Passagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem, lanche, criancaColo);
             negocioPassagem.adicionarPassagem(passagem);
             return passagem.getCodigo();
         }
-        
-         throw new PassagemJaExisteException();
+         
 
     }
 
@@ -258,34 +263,34 @@ public class FachadaFuncionario {
        return negocioPassagem.procurarPassagem(codigoPassagem);
     }
     
-    public void alterarPassagem(int codigoPassagem, Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemNaoExisteException{
+    public void alterarPassagem(int codigoPassagem, String cpf, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemNaoExisteException, PassageiroNaoExisteException{
+        Passageiro p = negocioPassageiro.procurarPassageiro(cpf);
+        
         Passagem passagem = negocioPassagem.procurarPassagem(codigoPassagem);
         
-        if(passagem == null){
-            throw new PassagemNaoExisteException(); 
+        if(p != null){
+                       
+            if(passagem != null){
+                passagem.setPassageiro(p);
+                passagem.setPreco(preco);
+                passagem.seteDentroDoEstado(eDentroDoEstado);
+                passagem.setCodigoPoltrona(codigoPoltrona);
+                passagem.setTipoDeAssento(tipoDeAssento);
+                passagem.setTipoDePassagem(tipoDePassagem);
+                passagem.setLanche(lanche);
+                passagem.setCriancaColo(criancaColo);
+                                 
+            }
+            else{
+                throw new PassagemNaoExisteException();
+            }
         }
         
-        passagem.setPassageiro(passageiro);
-        passagem.setPreco(preco);
-        passagem.seteDentroDoEstado(eDentroDoEstado);
-        passagem.setCodigoPoltrona(codigoPoltrona);
-        passagem.setTipoDeAssento(tipoDeAssento);
-        passagem.setTipoDePassagem(tipoDePassagem);
-        passagem.setLanche(lanche);
-        passagem.setCriancaColo(criancaColo);
+        else{
+            throw new PassageiroNaoExisteException();
+        }       
        
     }
-    
-    /*public void removerPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassagemNaoExisteException{
-        //Passagem passagem = negocioPassagem.procurarPassagem(passagem);
-        
-        if(passagem != null){
-            passagem = negocioPassagem.removerPassagem(passagem);
-            
-        }
-        
-        throw new PassagemNaoExisteException();
-    }*/
     
     public void removerPassagem(int codigoPassagem) throws PassagemNaoExisteException{
         Passagem passagem = negocioPassagem.procurarPassagem(codigoPassagem);
@@ -294,9 +299,11 @@ public class FachadaFuncionario {
             
             throw new PassagemNaoExisteException();
         }
-        negocioPassagem.removerPassagem(codigoPassagem);
+        else{
+            negocioPassagem.removerPassagem(codigoPassagem);
+        }
         
-    }
+    }   
 
 
 
