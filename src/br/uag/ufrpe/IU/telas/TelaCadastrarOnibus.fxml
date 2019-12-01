@@ -46,11 +46,11 @@
         </rowConstraints>
          <children>
             <Label text="Motorista" />
-            <ComboBox fx:id="Motoristas" prefHeight="29.0" prefWidth="324.0" GridPane.columnIndex="1" />
             <Label text="Placa" GridPane.rowIndex="1" />
             <TextField fx:id="PlacaOnibus" prefHeight="29.0" prefWidth="148.0" promptText="XXX-XXXX" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Total de Poltronas" GridPane.rowIndex="2" />
             <TextField fx:id="TotalPoltronas" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="motorista" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="64.0" layoutY="597.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
