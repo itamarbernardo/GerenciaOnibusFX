@@ -5,12 +5,16 @@
  */
 package br.uag.ufrpe.IU.controladores;
 
+import br.uag.ufrpe.negocio.NegocioPassageiro;
 import br.uag.ufrpe.negocio.fachada.FachadaFuncionario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import br.uag.ufrpe.negocio.NegocioPassagem;
+import br.uag.ufrpe.negocio.NegocioPassageiro;
+import br.uag.ufrpe.negocio.entidades.Passageiro;
 import br.uag.ufrpe.negocio.entidades.Passagem;
+import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,13 +35,11 @@ import javafx.scene.control.ToggleGroup;
  */
 public class CadastrarPassagemController implements Initializable {
     
-    ObservableList tipoAssentoList = FXCollections.observableArrayList("Convencional", "Obeso", "Parcialmente Reclinável", "Totalmente Reclinável");
-    ObservableList tipoGratuidadeList = FXCollections.observableArrayList("Idoso", "ID Jovem", "Parcial Idoso", "Parcial ID Jovem");
-       
+    
     private FachadaFuncionario fachadaFuncionario;
     
     @FXML
-    private TextField NomePassageiro;
+    private TextField IdentificarPassageiro;
     @FXML
     private TextField PrecoPassagem;
     @FXML
@@ -75,7 +77,7 @@ public class CadastrarPassagemController implements Initializable {
 
 
     @FXML
-    private void CadastrarPassagem(ActionEvent event) {
+    private void CadastrarPassagem(ActionEvent event) throws PassageiroNaoExisteException {
         
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
@@ -85,37 +87,92 @@ public class CadastrarPassagemController implements Initializable {
         alertaConfirmacao.setTitle("Confirmação");
         alertaConfirmacao.setHeaderText("Passagem Cadastrada com sucesso!");
         
-        boolean verifica = true;
+        boolean verificaPassagem = true;
+        // -----------------
         
+        String cpf = IdentificarPassageiro.getText();
+        
+        if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*") ){
+            alertaErro.setContentText("Erro ao preencher os dados!");
+            alertaErro.show();
+            verificaPassagem = false;
+        }
+        
+        Passageiro verificaCPF  = fachadaFuncionario.procurarPassageiro(cpf);
+                
+        if(verificaCPF == null){
+            alertaErro.setContentText("Erro! CPF não existe.");
+            alertaErro.show();
+            verificaPassagem = false;
+        }
+        
+        // ------------------------
         
         String preco = PrecoPassagem.getText();
-        boolean eDentroDoEstado;
-        boolean possuiServicoBordo;
-        boolean possuiCriancaColo;
+        //preco.replaceAll(",", ".");
+        double precoDouble = Double.parseDouble(preco);
         
+        String assentoTipo = TipoDeAssento.getText();
+                
+        String codigoP = numeroPoltrona.getText();
+        int codigoPoltrona = Integer.parseInt(codigoP);
         
-        switch (TipoDeAssento.getText()) {
-            case "TotalReclinavel":
+        String tipoDeGratuidade = TipoGratuidade.getText();
+        
+        switch (tipoDeGratuidade) {
+            case "Idoso":
+              verificaPassagem = true;
               break;
                         
-            case "Reclinavel":
+            case "IdJovem":
+              verificaPassagem = true;
               break;
                 
-            case "Obeso":
+            case "ParcialIdoso":
+                verificaPassagem = true;
                 break;
                 
-            case "Convencional":
+            case "ParcialIdJovem":
+                verificaPassagem = true;
+                break;
+            case "Normal":
+                verificaPassagem = true;
                 break;
 
             default:
                 alertaErro.setContentText("Erro ao preencher os dados!");
                 alertaErro.show();
-                verifica = false;
-        }
+                verificaPassagem = false;
+        }        
         
+        boolean eDentroDoEstado = false;
+        boolean possuiServicoBordo = false;
+        boolean possuiCriancaColo = false;
+         // -----------------
         
-        
-        
+        switch (assentoTipo) {
+            case "TotalReclinavel":
+              verificaPassagem = true;
+              break;
+                        
+            case "Reclinavel":
+              verificaPassagem = true;
+              break;
+                
+            case "Obeso":
+                verificaPassagem = true;
+                break;
+                
+            case "Convencional":
+                verificaPassagem = true;
+                break;
+
+            default:
+                alertaErro.setContentText("Erro ao preencher os dados!");
+                alertaErro.show();
+                verificaPassagem = false;
+        }        
+        // ----------------
         
         if(Municipal.isSelected()){
             eDentroDoEstado = true;
@@ -139,15 +196,23 @@ public class CadastrarPassagemController implements Initializable {
         else if(NaoPossuiCriancaColo.isSelected()){
             possuiServicoBordo = false;
         }
+        
+        else if(!Municipal.isSelected() || !Estadual.isSelected() || !PossuiLanche.isSelected() || !NaoPossuiLanche.isSelected() || !PossuiCriancaColo.isSelected() || !NaoPossuiCriancaColo.isSelected()){
+                alertaErro.setContentText("Alguns dados não fora preenchidos!");
+                alertaErro.show();
+                verificaPassagem = false;
+        }
+        // -----------------------
             
         
         
         
-        if (verifica) {
+        if (verificaPassagem) {
             try {
+               
                 int codigo;
                 
-                codigo = fachadaFuncionario.adicionarPassagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoAssento, tipoDeGratuidade, possuiCriancaColo, possuiServicoBordo);
+                codigo = fachadaFuncionario.adicionarPassagem(verificaCPF, precoDouble, eDentroDoEstado, codigoPoltrona, assentoTipo, tipoDeGratuidade, possuiCriancaColo, possuiServicoBordo);
                 alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
                 alertaConfirmacao.setContentText("Passagem cadastrada com sucesso!\nCódigo da Passagem: " + codigo);
                 alertaConfirmacao.show();
@@ -173,6 +238,3 @@ public class CadastrarPassagemController implements Initializable {
 
 }
 
-    @FXML
-    private void Voltar(ActionEvent event) {
-    }
