@@ -129,9 +129,8 @@ public class CadastroViagemController implements Initializable {
         if (verifica) {
             //Se entrar aqui, passou por todas as verificações, e vai tentar cadastrar.
             try {
-                fachadaGerente.adicionarViagem(placa, origem, destino, horarioSaida, horarioChegada, dataSaida, dataChegada);
-                alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                alertaConfirmacao.setContentText("Viagem cadastrada com sucesso!");
+                int codigo = fachadaGerente.adicionarViagem(placa, origem, destino, horarioSaida, horarioChegada, dataSaida, dataChegada);
+                alertaConfirmacao.setContentText("Viagem cadastrada com sucesso! Codigo da viagem: " + codigo);
                 alertaConfirmacao.show();
 
             } catch (Exception ex) {
@@ -145,6 +144,10 @@ public class CadastroViagemController implements Initializable {
             alertaErro.setContentText("Erro ao preencher os dados!");
             alertaErro.show();
         }
+    }
+    
+    public void voltar(ActionEvent event){
+        
     }
 
     @Override

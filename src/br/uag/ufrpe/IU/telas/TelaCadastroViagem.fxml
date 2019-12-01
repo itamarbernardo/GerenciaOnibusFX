@@ -29,5 +29,6 @@
       <Label fx:id="erroDatasHoras" layoutX="338.0" layoutY="273.0" textFill="#f50505" />
       <Label fx:id="erroHoraSaida" layoutX="311.0" layoutY="237.0" textFill="#f50505" />
       <Label fx:id="erroHoraChegada" layoutX="311.0" layoutY="310.0" textFill="#f20404" />
+      <Button fx:id="voltar" layoutX="395.0" layoutY="395.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
     </children>
 </AnchorPane>

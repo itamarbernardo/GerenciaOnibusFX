@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
  *
  * @author Itamar Jr
  */
-public class AlterarViagemController implements Initializable {
+public class ProcurarAlterarRemoverViagemController implements Initializable {
 
     private FachadaGerente fachadaGerente;
 
@@ -55,8 +55,8 @@ public class AlterarViagemController implements Initializable {
     @FXML
     private Label erroCodigo;
 
-    public AlterarViagemController() {
-        fachadaGerente = FachadaGerente.getFachadaGerente();
+    public ProcurarAlterarRemoverViagemController() {
+        this.fachadaGerente = FachadaGerente.getFachadaGerente();
     }
 
     @FXML
@@ -185,6 +185,47 @@ public class AlterarViagemController implements Initializable {
         }
     }
 
+    public void removerViagem(ActionEvent event) {
+        Alert alertaErro = new Alert(Alert.AlertType.ERROR);
+        alertaErro.setTitle("Erro");
+        alertaErro.setHeaderText("Erro ao remover");
+
+        Alert alertaConfirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacao.setTitle("Confirmação");
+        alertaConfirmacao.setHeaderText("Confirmação ao remover");
+
+        boolean verifica = true;
+
+        int codigo = 0;
+        Viagem v;
+        try {
+            codigo = Integer.parseInt(txtCodigoViagem.getText());
+
+        } catch (Exception ex) {
+            verifica = false;
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+            erroCodigo.setText("Digite um número inteiro");
+        }
+        if (verifica) {
+            try {
+                fachadaGerente.removerViagem(codigo);
+                alertaConfirmacao.setContentText("Viagem removida com sucesso!");
+                alertaConfirmacao.show();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
+                alertaErro.setContentText(ex.getMessage());
+                alertaErro.show();
+                
+            }
+        }
+    }
+
+    public void voltar(ActionEvent event){
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

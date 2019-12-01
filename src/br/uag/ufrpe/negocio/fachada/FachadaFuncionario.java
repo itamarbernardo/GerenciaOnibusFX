@@ -152,38 +152,6 @@ public class FachadaFuncionario {
         return viagem.calcularPorcentagemPassageiros();
     }
 
-    public int getQuantidadeIdJovem(int codigo) throws ViagemNaoExisteException {
-        Viagem viagem = negocioViagem.procurar(codigo);
-        if (viagem == null) {
-            throw new ViagemNaoExisteException();
-        }
-        return viagem.getQuantidadeIdJovem();
-    }
-
-    public int getQuantidadeIdJovemParcial(int codigo) throws ViagemNaoExisteException {
-        Viagem viagem = negocioViagem.procurar(codigo);
-        if (viagem == null) {
-            throw new ViagemNaoExisteException();
-        }
-        return viagem.getQuantidadeIdJovemParcial();
-    }
-
-    public int getQuantidadeIdoso(int codigo) throws ViagemNaoExisteException {
-        Viagem viagem = negocioViagem.procurar(codigo);
-        if (viagem == null) {
-            throw new ViagemNaoExisteException();
-        }
-        return viagem.getQuantidadeIdoso();
-    }
-
-    public int getQuantidadeIdosoParcial(int codigo) throws ViagemNaoExisteException {
-        Viagem viagem = negocioViagem.procurar(codigo);
-        if (viagem == null) {
-            throw new ViagemNaoExisteException();
-        }
-        return viagem.getQuantidadeIdosoParcial();
-    }
-
     public boolean passageiroEstaNaViagem(int codigo, String cpf) throws ViagemNaoExisteException, PassageiroNaoExisteException {
         Viagem viagem = negocioViagem.procurar(codigo);
         if (viagem == null) {
@@ -197,7 +165,7 @@ public class FachadaFuncionario {
         return viagem.estaNaViagem(passageiro);
     }
 
-    public String procurarUltimasViagensDeUmPassageiro(int codigo, String cpf) throws ViagemNaoExisteException, PassageiroNaoExisteException {
+    public String procurarUltimasViagensDeUmPassageiro(String cpf) throws ViagemNaoExisteException, PassageiroNaoExisteException {
         Passageiro passageiro = negocioPassageiro.procurarPassageiro(cpf);
         if (passageiro == null) {
             throw new PassageiroNaoExisteException();

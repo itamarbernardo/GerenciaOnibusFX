@@ -31,6 +31,7 @@ import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemExceptio
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoPertenceAViagemException;
+import br.uag.ufrpe.negocio.excecoes.viagem.DescontoException;
 import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
 import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemJaExisteException;
@@ -62,7 +63,7 @@ public class FachadaGerente extends FachadaFuncionario {
         return fachadaGerente;
     }
 
-    public void adicionarViagem(String placa, String origem, String destino, String horarioSaida, String horarioChegada, String dataSaida, String dataChegada) throws ViagemJaExisteException, MotoristaNaoDisponivelException, OnibusNaoDisponivelException, OnibusNaoExisteException {
+    public int adicionarViagem(String placa, String origem, String destino, String horarioSaida, String horarioChegada, String dataSaida, String dataChegada) throws ViagemJaExisteException, MotoristaNaoDisponivelException, OnibusNaoDisponivelException, OnibusNaoExisteException {
 
         Onibus onibus = negocioOnibus.procurarOnibus(placa);
         if (onibus == null) {
@@ -71,6 +72,8 @@ public class FachadaGerente extends FachadaFuncionario {
         Viagem viagem = new Viagem(onibus, origem, destino, horarioSaida, horarioChegada, dataSaida, dataChegada);
 
         getNegocioViagem().adicionar(viagem);
+        
+        return viagem.getCodigo();
     }
 
     public void removerViagem(int codigo) throws ViagemNaoExisteException {
@@ -95,7 +98,15 @@ public class FachadaGerente extends FachadaFuncionario {
         viagem.setDataChegada(dataChegada);
     }
 
-    public void aplicarDescontoEmTodasAsPassagens(int codigo, double desconto) throws ViagemNaoExisteException {
+    public double calcularLucroDaViagem(int codigo) throws ViagemNaoExisteException {
+        Viagem viagem = getNegocioViagem().procurar(codigo);
+        if (viagem == null) {
+            throw new ViagemNaoExisteException();
+        }
+        return viagem.calculaLucro();
+    }
+    
+    public void aplicarDescontoEmTodasAsPassagens(int codigo, double desconto) throws ViagemNaoExisteException, DescontoException {
         Viagem viagem = getNegocioViagem().procurar(codigo);
         if (viagem == null) {
             throw new ViagemNaoExisteException();

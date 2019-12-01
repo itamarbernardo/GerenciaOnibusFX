@@ -20,7 +20,7 @@ public class ConstrucaoGUIGerenciaOnibus extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarViagem.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemViagens.fxml"));
         
         Scene scene = new Scene(root);
         

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.VenderCancelarPassagemController">
+   <children>
+      <Label layoutX="227.0" layoutY="28.0" text="Vender / Cancelar Passagens" />
+      <Label layoutX="40.0" layoutY="80.0" text="Codigo da viagem:" />
+      <Label layoutX="290.0" layoutY="80.0" text="Código da passagem:" />
+      <Label layoutX="40.0" layoutY="224.0" text="Codigo da viagem:" />
+      <Label layoutX="290.0" layoutY="224.0" text="CPF do passageiro:" />
+      <TextField fx:id="txtCodigoViagem" layoutX="153.0" layoutY="76.0" prefHeight="25.0" prefWidth="83.0" />
+      <TextField fx:id="txtCodigoPassagem" layoutX="419.0" layoutY="76.0" prefHeight="25.0" prefWidth="115.0" />
+      <TextField fx:id="txtCodigoViagem2" layoutX="153.0" layoutY="220.0" prefHeight="25.0" prefWidth="83.0" />
+      <TextField fx:id="txtCpf" layoutX="419.0" layoutY="220.0" />
+      <Text fill="#1f8a41" layoutX="40.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vender" />
+      <Text fill="#dd0e0e" layoutX="40.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancelar" />
+      <Button fx:id="vender" layoutX="442.0" layoutY="133.0" mnemonicParsing="false" onAction="#vender" text="Vender" />
+      <Button fx:id="cancelar" layoutX="433.0" layoutY="278.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar passagem" />
+      <Button fx:id="voltar" layoutX="516.0" layoutY="333.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+   </children>
+</AnchorPane>

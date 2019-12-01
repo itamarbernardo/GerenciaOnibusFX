@@ -5,11 +5,12 @@
  */
 package br.uag.ufrpe.negocio.entidades;
 
-import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemException;
 import br.uag.ufrpe.negocio.excecoes.onibus.OnibusCheioException;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
+import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoPertenceAViagemException;
+import br.uag.ufrpe.negocio.excecoes.viagem.DescontoException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +58,7 @@ public class Viagem {
 
         this.poltronas = new HashMap<>();
         copiarValoresPoltronas();
-        
+
         this.quantidadeIdJovem = 0;
         this.quantidadeIdoso = 0;
         this.quantidadeIdJovemParcial = 0;
@@ -70,12 +71,17 @@ public class Viagem {
         }
     }
 
-    public void aplicarDescontoEmTodasAsPassagens(double desconto) {
-        int tamanho = passagens.size();
-        for (int i = 0; i < tamanho; i++) {
-            double preco = passagens.get(i).getPreco();
-            double novoPreco = preco - (preco * desconto);
-            passagens.get(i).setPreco(novoPreco);
+    public void aplicarDescontoEmTodasAsPassagens(double desconto) throws DescontoException {
+        if (desconto > 0) {
+
+            int tamanho = passagens.size();
+            for (int i = 0; i < tamanho; i++) {
+                double preco = passagens.get(i).getPreco();
+                double novoPreco = preco - (preco * desconto);
+                passagens.get(i).setPreco(novoPreco);
+            }
+        }else{
+            throw new DescontoException();
         }
     }
 
@@ -86,17 +92,17 @@ public class Viagem {
     public double calcularPorcentagemPassageiros() {
         double porcentagem = 0;
 
-        if(onibus.getTotalPoltronas() != 0){
+        if (onibus.getTotalPoltronas() != 0) {
             porcentagem = passagens.size() / onibus.getTotalPoltronas();
         }
         return porcentagem;
     }
 
     public double calcularPorcentagemLanche() {
-        double porcentagem = 0; 
-        
-        if(passagens.size() != 0){
-            porcentagem = calculaQuantidadeLanche() / passagens.size();        
+        double porcentagem = 0;
+
+        if (passagens.size() != 0) {
+            porcentagem = calculaQuantidadeLanche() / passagens.size();
         }
 
         return porcentagem;
@@ -153,6 +159,7 @@ public class Viagem {
 
         return mensagemErro;
     }
+
     /**
      * Este método verifica a quantidade de poltronas vazias na Viagem.
      *
@@ -205,6 +212,7 @@ public class Viagem {
 
     /**
      * Este método verifica se um passageiro está na viagem.
+     *
      * @param p Passageiro que se deseja rerificar.
      * @return Retorna true se ele estiver e false se não estiver.
      */
@@ -240,17 +248,14 @@ public class Viagem {
                 mensagemErro = verificarDisponibilidadeAssento(p) + verificarDisponibilidadeTipoDePassagem(p);
                 if (mensagemErro.length() == 0) {
                     passagens.add(p);
-                }
-                else if(verificarDisponibilidadeAssento(p).length() != 0){
+                } else if (verificarDisponibilidadeAssento(p).length() != 0) {
                     throw new IndisponibilidadeDeAssentoException(verificarDisponibilidadeAssento(p));
-                }
-                else if(verificarDisponibilidadeTipoDePassagem(p).length() != 0){
+                } else if (verificarDisponibilidadeTipoDePassagem(p).length() != 0) {
                     throw new IndisponibilidadeTipoDePassagemException(verificarDisponibilidadeTipoDePassagem(p));
                 }
-                
 
             } else {
-                throw new OnibusCheioException(); 
+                throw new OnibusCheioException();
             }
         } else {
             throw new PassageiroJaEstaNaViagemException();
@@ -260,26 +265,29 @@ public class Viagem {
 
     public void cancelarPassagem(Passagem p) throws PassagemNaoPertenceAViagemException {
         int index = passagens.indexOf(p);
-        
-        if(index != -1){
-           passagens.remove(p);
-        }else{
+
+        if (index != -1) {
+            passagens.remove(p);
+        } else {
             throw new PassagemNaoPertenceAViagemException();
         }
 
     }
-    
+
     /**
-     * Este método procura uma passagem na viagem por um passageiro, 
-     * já que um mesmo passageiro não pode tirar duas passagens.
-     * @param passageiro Passageiro que pode ou não ter uma passagem nessa viagem.
-     * @return Retorna a passagem que o passageiro possui na viagem ou null se ele não possuir passagem.
+     * Este método procura uma passagem na viagem por um passageiro, já que um
+     * mesmo passageiro não pode tirar duas passagens.
+     *
+     * @param passageiro Passageiro que pode ou não ter uma passagem nessa
+     * viagem.
+     * @return Retorna a passagem que o passageiro possui na viagem ou null se
+     * ele não possuir passagem.
      */
-    public Passagem procurarPassagem(Passageiro passageiro){
+    public Passagem procurarPassagem(Passageiro passageiro) {
         boolean verifica = estaNaViagem(passageiro);
-        if(verifica){
-            for(Passagem passagem : passagens){
-                if(passagem.getPassageiro().equals(passageiro)){
+        if (verifica) {
+            for (Passagem passagem : passagens) {
+                if (passagem.getPassageiro().equals(passageiro)) {
                     return passagem;
                 }
             }
@@ -316,10 +324,10 @@ public class Viagem {
 
     public List<Passagem> listagemPassagens() {
         List<Passagem> passagensCopia = new ArrayList<>();
-        for(Passagem p : passagens){
+        for (Passagem p : passagens) {
             passagensCopia.add(p);
         }
-        
+
         return passagensCopia;
     }
 
@@ -389,7 +397,7 @@ public class Viagem {
 
     public Map<Integer, String> listaPoltronas() {
         Map<Integer, String> poltronasCopia = new HashMap<>();
-        
+
         for (int i = 1; i <= poltronas.size(); i++) {
             poltronasCopia.put(i, poltronas.get(i));
         }
