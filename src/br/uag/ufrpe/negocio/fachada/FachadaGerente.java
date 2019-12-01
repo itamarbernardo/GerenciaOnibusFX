@@ -171,7 +171,6 @@ public class FachadaGerente extends FachadaFuncionario {
     }
 
     public void alterarMotorista(String nomeCompleto, String cpf, String rg, String telefone, String numeroCarteiraMotorista, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws MotoristaNaoExisteException {
-        Endereco endereco = new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado);
         Motorista motorista = negocioMotorista.procurarMotorista(numeroCarteiraMotorista);
         if (motorista == null) {
             throw new MotoristaNaoExisteException();
@@ -180,8 +179,19 @@ public class FachadaGerente extends FachadaFuncionario {
         motorista.setCpf(cpf);
         motorista.setRg(rg);
         motorista.setTelefone(telefone);
-        motorista.setEndereco(endereco);
+        motorista.getEndereco().setCep(cep);
+        motorista.getEndereco().setLogradouro(logradouro);
+        motorista.getEndereco().setBairro(bairro);
+        motorista.getEndereco().setNumero(numero);
+        motorista.getEndereco().setComplemento(complemento);
+        motorista.getEndereco().setCidade(cidade);
+        motorista.getEndereco().setEstado(estado);
+        
     }
+    
+public Motorista procurarMotorista(String numeroCarteiraMotorista) throws MotoristaNaoExisteException{
+        return negocioMotorista.procurarMotorista(numeroCarteiraMotorista);
+    }    
 
     public void adicionarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioJaExisteException, FuncionarioNaoEncontradoException{
         Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
@@ -196,11 +206,9 @@ public class FachadaGerente extends FachadaFuncionario {
         }
         
     }
-
+    
     public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioNaoEncontradoException{
-        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
-        Endereco endereco = new Endereco(cep,logradouro,bairro,numero,complemento,cidade,estado);
-        
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);        
         if(funcionario == null){
             throw new FuncionarioNaoEncontradoException();
         }
