@@ -1,5 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.uag.ufrpe.IU.controladores;
 
+import br.uag.ufrpe.negocio.entidades.Funcionario;
 import br.uag.ufrpe.negocio.fachada.FachadaGerente;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,14 +21,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-/**
- * FXML Controller class
- *
- * @author Jackson
- */
-public class CadastrarFuncionarioController implements Initializable {
-    private final FachadaGerente fachadaGerente;  
-
+public class AlterarFuncionarioController {
+    private final FachadaGerente fachadaGerente;
+    
     @FXML
     private TextField labelFuncionarioCep;
 
@@ -40,28 +40,43 @@ public class CadastrarFuncionarioController implements Initializable {
     private TextField labelFuncionarioNumero;
 
     @FXML
+    private Label erroEmail;
+
+    @FXML
     private TextField labelFuncionarioTelefone;
 
     @FXML
     private ToggleGroup eGerente;
 
     @FXML
-    private TextField labelFuncionarioNome;
+    private Label erroRg;
 
     @FXML
-    private Button cadastrarFuncionario;
+    private TextField labelFuncionarioNome;
 
     @FXML
     private TextField labelFuncionarioRg;
 
     @FXML
+    private Label erroNumero;
+
+    @FXML
     private TextField labelFuncionarioLogradouro;
+
+    @FXML
+    private Button procurarFuncionario;
 
     @FXML
     private TextField labelFuncionarioComplemento;
 
     @FXML
+    private Label erroCep;
+
+    @FXML
     private TextField labelFuncionarioCpf;
+
+    @FXML
+    private Label erroCpf;
 
     @FXML
     private TextField labelFuncionarioCidade;
@@ -70,28 +85,15 @@ public class CadastrarFuncionarioController implements Initializable {
     private TextField labelFuncionarioEmail;
 
     @FXML
-    private TextField labelFuncionarioEstado;
-    
-    @FXML
-    private Label erroRg;
-    
-    @FXML
-    private Label erroCpf;
-    
+    private Button alterarFuncionario1;
+
     @FXML
     private Label erroSenha;
-    
+
     @FXML
-    private Label erroEmail;
+    private TextField labelFuncionarioEstado;
     
-    @FXML
-    private Label erroCep;
-    
-    @FXML
-    private Label erroNumero;
-    
-    
-    public CadastrarFuncionarioController() {
+    public AlterarFuncionarioController() {
         fachadaGerente = FachadaGerente.getFachadaGerente();
     }
     
@@ -107,16 +109,16 @@ public class CadastrarFuncionarioController implements Initializable {
         }
         return emailValido;
     }
-
-    @FXML
-    void cadastrarFuncionario(ActionEvent event) {
+    
+     @FXML
+    void alterarFuncionario(ActionEvent event) {
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");
         
         Alert alertaConfirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         alertaConfirmacao.setTitle("CONFIRMAÇÃO");
-        alertaConfirmacao.setHeaderText("Confirmação ao Cadastrar");
+        alertaConfirmacao.setHeaderText("Confirmação ao Alterar");
         
         String nome = labelFuncionarioNome.getText();
         String cpf = labelFuncionarioCpf.getText();
@@ -172,7 +174,7 @@ public class CadastrarFuncionarioController implements Initializable {
             try {
                 fachadaGerente.adicionarFuncionario(nome, cpf, rg, telefone, email, senha, gerente, cep, logradouro, bairro, numero, complemento, cidade, estado);
                 alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                alertaConfirmacao.setContentText("Funcionario cadastradado com sucesso!");
+                alertaConfirmacao.setContentText("Funcionario Alterado com sucesso!");
                 alertaConfirmacao.show();
 
             } 
@@ -188,10 +190,57 @@ public class CadastrarFuncionarioController implements Initializable {
             alertaErro.show();
         }
     }
+
+    @FXML
+    void procurarFuncionario(ActionEvent event) {
+        Alert alertaErro = new Alert(Alert.AlertType.ERROR);
+        alertaErro.setTitle("Erro");
+        alertaErro.setHeaderText("Funcionario não encontrado");
+        
+        String cep = labelFuncionarioCep.getText();
+        String logradouro = labelFuncionarioLogradouro.getText();
+        String bairro = labelFuncionarioBairro.getText();
+        String numero = labelFuncionarioNumero.getText();
+        String complemento = labelFuncionarioComplemento.getText();
+        String cidade = labelFuncionarioCidade.getText();
+        String estado = labelFuncionarioEstado.getText();
+        
+        String codigo;
+        Funcionario func;
+        try {
+            codigo = labelFuncionarioCpf.getText();
+            func = fachadaGerente.procurarFuncionario(codigo);
+            if (func != null) {
+                labelFuncionarioNome.setText(func.getNomeCompleto());
+                labelFuncionarioCpf.setText(func.getCpf());
+                labelFuncionarioRg.setText(func.getRg());
+                labelFuncionarioTelefone.setText(func.getTelefone());
+                labelFuncionarioSenha.setText(func.getSenha());
+                labelFuncionarioEmail.setText(func.getEmail());
+                func.getEndereco().setCep(cep);
+                func.getEndereco().setLogradouro(logradouro);
+                func.getEndereco().setBairro(bairro);
+                func.getEndereco().setNumero(numero);
+                func.getEndereco().setComplemento(complemento);
+                func.getEndereco().setCidade(cidade);
+                func.getEndereco().setEstado(estado);
+                
+
+                
+            } else {
+                alertaErro.setContentText("Funcionario não encontrada!");
+                alertaErro.show();
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+            erroCpf.setText("Entrada invalida");
+        }
+    }
+
+   
+     
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
 }
+

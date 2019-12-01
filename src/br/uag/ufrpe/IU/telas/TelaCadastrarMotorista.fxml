@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="NomeMotorista" prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.telas.TelaCadastrarMotoristaController">
+   <children>
+      <Label layoutX="14.0" layoutY="85.0" prefHeight="25.0" prefWidth="84.0" text="     Nome">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NomeMotorista" layoutX="104.0" layoutY="85.0" text=" " />
+      <TextField fx:id="CpfMotorista" layoutX="104.0" layoutY="131.0" />
+      <Label layoutX="15.0" layoutY="132.0" prefHeight="25.0" prefWidth="69.0" text="     CPF">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="168.0" prefHeight="35.0" prefWidth="57.0" text="    RG">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="212.0" prefHeight="35.0" prefWidth="69.0" text="Telefone">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="253.0" prefHeight="35.0" prefWidth="57.0" text="CNH">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="295.0" prefHeight="35.0" prefWidth="49.0" text="CEP">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="RgMotorista" layoutX="104.0" layoutY="173.0" />
+      <TextField fx:id="TelefoneMotorista" layoutX="104.0" layoutY="217.0" />
+      <TextField fx:id="CnhMotorista" layoutX="104.0" layoutY="258.0" />
+      <TextField fx:id="CepMotorista" layoutX="104.0" layoutY="300.0" promptText="XXXXX-XXX" />
+      <Label layoutX="317.0" layoutY="84.0" prefHeight="25.0" prefWidth="84.0" text="Logradouro">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="318.0" layoutY="132.0" text="Bairro">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="173.0" prefHeight="25.0" prefWidth="69.0" text="Número">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="217.0" prefHeight="25.0" prefWidth="96.0" text="Complemento">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="258.0" prefHeight="25.0" prefWidth="57.0" text="Cidade">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="300.0" prefHeight="25.0" prefWidth="69.0" text="Estado">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="LogradouroMotorista" layoutX="416.0" layoutY="84.0" />
+      <TextField fx:id="BairroMotorista" layoutX="416.0" layoutY="132.0" />
+      <TextField fx:id="NumeroMotorista" layoutX="416.0" layoutY="173.0" promptText="Ex: 101, 200" />
+      <TextField fx:id="ComplementoMotorista" layoutX="416.0" layoutY="217.0" promptText="Ex: Predio, casa" />
+      <TextField fx:id="CidadeMotorista" layoutX="416.0" layoutY="258.0" />
+      <TextField fx:id="EstadoMotorista" layoutX="416.0" layoutY="300.0" />
+      <Label layoutX="179.0" layoutY="26.0" prefHeight="25.0" prefWidth="260.0" text="  Cadastro de Motorista">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
