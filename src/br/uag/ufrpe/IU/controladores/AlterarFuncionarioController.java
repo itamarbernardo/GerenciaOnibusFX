@@ -122,8 +122,8 @@ public class AlterarFuncionarioController {
         
         String nome = labelFuncionarioNome.getText();
         String cpf = labelFuncionarioCpf.getText();
-        String rg = labelFuncionarioCpf.getText();
-        String telefone = labelFuncionarioCpf.getText();
+        String rg = labelFuncionarioRg.getText();
+        String telefone = labelFuncionarioTelefone.getText();
         String email = labelFuncionarioEmail.getText();
         String senha = labelFuncionarioSenha.getText();
         boolean gerente = true;
@@ -236,11 +236,8 @@ public class AlterarFuncionarioController {
             ex.printStackTrace();
             erroCpf.setText("Entrada invalida");
         }
-    }
-
-   
+    }   
      
-    
 
 }
 
