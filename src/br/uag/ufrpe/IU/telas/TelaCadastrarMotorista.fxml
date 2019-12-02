@@ -91,5 +91,11 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <Label fx:id="erroCpf" layoutX="105.0" layoutY="160.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="erroRg" layoutX="105.0" layoutY="195.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="erroTelefone" layoutX="104.0" layoutY="241.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="erroCnh" layoutX="104.0" layoutY="280.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="erroCep" layoutX="105.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="erroNumero" layoutX="416.0" layoutY="195.0" prefHeight="17.0" prefWidth="149.0" />
    </children>
 </AnchorPane>
