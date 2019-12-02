@@ -32,13 +32,13 @@ public class CadastrarMotoristaController implements Initializable {
     private TextField txtComplementoMotorista;
 
     @FXML
+    private Label erroCnh;
+
+    @FXML
     private TextField txtNumeroMotorista;
 
     @FXML
     private Label rgMotorista;
-
-    @FXML
-    private Text erroCnh;
 
     @FXML
     private TextField txtNomeMotorista;
@@ -53,7 +53,7 @@ public class CadastrarMotoristaController implements Initializable {
     private Label lagradouroMotorista;
 
     @FXML
-    private Text erroCep;
+    private Label erroCep;
 
     @FXML
     private Label cnhMotorista;
@@ -62,7 +62,7 @@ public class CadastrarMotoristaController implements Initializable {
     private TextField txtEstadoMotorista;
 
     @FXML
-    private Text erroCpf;
+    private Label erroCpf;
 
     @FXML
     private Label complementoMotorista;
@@ -77,7 +77,7 @@ public class CadastrarMotoristaController implements Initializable {
     private Label cepMotorista;
 
     @FXML
-    private Text erroTelefone;
+    private Label erroTelefone;
 
     @FXML
     private TextField txtCepMotorista;
@@ -86,13 +86,13 @@ public class CadastrarMotoristaController implements Initializable {
     private Label nomeMotorista;
 
     @FXML
-    private Text erroRg;
+    private Label erroRg;
 
     @FXML
     private AnchorPane NomeMotorista;
 
     @FXML
-    private Text erroNumero;
+    private Label erroNumero;
 
     @FXML
     private Label telefoneMotorsita;
@@ -117,16 +117,10 @@ public class CadastrarMotoristaController implements Initializable {
 
     @FXML
     private Button cadastratMotorista;
-
     
      public CadastrarMotoristaController(){
         fachadaGerente = FachadaGerente.getFachadaGerente();
     }
-    
-
-    /**
-     * Initializes the controller class.
-     */
      
 
     @FXML
