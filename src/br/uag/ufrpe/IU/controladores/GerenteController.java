@@ -8,6 +8,7 @@ package br.uag.ufrpe.IU.controladores;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -212,8 +213,56 @@ public class GerenteController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
+    
+    @FXML
+    public void cadastrarFuncionario(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarFuncionario.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void procurarFuncionario(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarFuncionario.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void removerFuncionario(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaRemoverFuncionario.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void listagemFuncionarios(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemFuncionarios.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
