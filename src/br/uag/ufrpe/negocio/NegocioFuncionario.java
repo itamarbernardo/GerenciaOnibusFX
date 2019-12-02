@@ -6,6 +6,7 @@ import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioJaExisteException;
 
 import br.uag.ufrpe.dados.IRepositorioFuncionario;
 import br.uag.ufrpe.dados.RepositorioFuncionario;
+import java.util.List;
 
 /**
  *
@@ -51,6 +52,10 @@ public class NegocioFuncionario {
         else{
             throw new FuncionarioNaoEncontradoException();
         }
+    }
+    
+    public List<Funcionario> listagemFuncionarios() {
+        return repositorio.listagemFuncionarios();
     }
     
 }

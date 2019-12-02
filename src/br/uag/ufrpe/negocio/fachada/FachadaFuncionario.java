@@ -241,6 +241,10 @@ public class FachadaFuncionario {
         }
     }
     
+    public List<Passageiro> listagemPassageiros() {
+        return negocioPassageiro.listagemPassageiros();
+    }
+    
     public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
         Passageiro verificaPassageiro;
         verificaPassageiro = procurarPassageiro(passageiro.getCpf());
