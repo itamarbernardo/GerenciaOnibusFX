@@ -41,6 +41,7 @@ public class CadastrarPassagemController implements Initializable {
     
     private FachadaFuncionario fachadaFuncionario;
     
+    
     @FXML
     private TextField IdentificarPassageiro;
     @FXML
@@ -48,25 +49,15 @@ public class CadastrarPassagemController implements Initializable {
     @FXML
     private TextField TipoDeAssento;
     @FXML
-    private ToggleGroup TipoDeTarifa;
-    @FXML
-    private RadioButton PossuiCriancaColo;
+    private TextField numeroPoltrona;
     @FXML
     private TextField TipoGratuidade;
     @FXML
-    private ToggleGroup ServicoBordo;
+    private TextField tipoTarifa;
     @FXML
-    private RadioButton Municipal;
+    private TextField servicoBordo;
     @FXML
-    private RadioButton PossuiLanche;
-    @FXML
-    private RadioButton Estadual;
-    @FXML
-    private RadioButton NaoPossuiLanche;
-    @FXML
-    private RadioButton NaoPossuiCriancaColo;
-    @FXML
-    private TextField numeroPoltrona;
+    private TextField dependentes;
            
     
     @Override
@@ -79,6 +70,9 @@ public class CadastrarPassagemController implements Initializable {
     public CadastrarPassagemController() {
         fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
     }
+    
+    int codigoPoltrona;
+    double precoDouble;
 
 
     @FXML
@@ -93,15 +87,29 @@ public class CadastrarPassagemController implements Initializable {
         alertaConfirmacao.setHeaderText("Passagem Cadastrada com sucesso!");
         
         boolean verificaPassagem = true;
+        
+        boolean eDentroDoEstado = false;
+        boolean possuiServicoBordo = false;
+        boolean possuiCriancaColo = false;
+
         // -----------------
         
         String cpf = IdentificarPassageiro.getText();
+        String preco = PrecoPassagem.getText();
+        String assentoTipo = TipoDeAssento.getText().toUpperCase();
+        String codigoP = numeroPoltrona.getText();
+        String tipoDeGratuidade = TipoGratuidade.getText().toUpperCase();
+        String tarifa = tipoTarifa.getText().toUpperCase();
+        String lanche = servicoBordo.getText().toUpperCase();
+        String criancaColo = dependentes.getText().toUpperCase();
+        
         
         if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*") ){
-            alertaErro.setContentText("Erro ao preencher os dados!");
+            alertaErro.setContentText("Campo CPF vazio.");
             alertaErro.show();
             verificaPassagem = false;
         }
+        
         
         Passageiro verificaCPF  = fachadaFuncionario.procurarPassageiro(cpf);
                 
@@ -109,118 +117,124 @@ public class CadastrarPassagemController implements Initializable {
             alertaErro.setContentText("Erro! CPF não existe.");
             alertaErro.show();
             verificaPassagem = false;
+            return;
         }
         
-        // ------------------------
-        
-        String preco = PrecoPassagem.getText();
         if(preco.isEmpty()){
             alertaErro.setContentText("Erro! Campo preço de passagem vazio");
             alertaErro.show();
             verificaPassagem = false;
+            return;
         }
         
-        //preco.replaceAll(",", ".");
-        double precoDouble = Double.parseDouble(preco);
+        try{
+            preco.replaceAll(",", ".");
+            precoDouble = Double.parseDouble(preco);
+            verificaPassagem = true;
+        }
+        catch(Exception ex){
+                alertaErro.setHeaderText("Insira apenas numeros no campo Preço");
+                alertaErro.show();
+                verificaPassagem = false;
+        }
         
-        String assentoTipo = TipoDeAssento.getText();
-                
-        String codigoP = numeroPoltrona.getText();
-        int codigoPoltrona = Integer.parseInt(codigoP);
-        
-        String tipoDeGratuidade = TipoGratuidade.getText();
-        
-        switch (tipoDeGratuidade) {
-            case "Idoso":
-              verificaPassagem = true;
-              break;
-                        
-            case "IdJovem":
-              verificaPassagem = true;
-              break;
-                
-            case "ParcialIdoso":
-                verificaPassagem = true;
-                break;
-                
-            case "ParcialIdJovem":
-                verificaPassagem = true;
-                break;
-            case "Normal":
-                verificaPassagem = true;
-                break;
+        try{
+            codigoPoltrona = Integer.parseInt(codigoP);
+            verificaPassagem = true;
+        }
+        catch(Exception ex){
+                alertaErro.setHeaderText("Insira apenas numeros no campo Número do Assento.");
+                alertaErro.show();
+                verificaPassagem = false;
+            }       
 
-            default:
-                alertaErro.setContentText("Erro ao preencher os dados!");
-                alertaErro.show();
-                verificaPassagem = false;
-        }        
         
-        boolean eDentroDoEstado = false;
-        boolean possuiServicoBordo = false;
-        boolean possuiCriancaColo = false;
-         // -----------------
+        switch(assentoTipo){
+                case "TOTAL RECINAVEL":
+                case "TOTAL RECLINÁVEL":
+                case "PARCIAL RECLINAVEL":
+                case "PARCIAL RECLINÁVEL":
+                case "OBESO":
+                case "CONVENCIONAL":
+                    break;
+                    
+                default:
+                    alertaErro.setHeaderText("Insira apenas TOTAL RECLINAVEL, PARCIAL RECLINAVEL, OBESO ou CONVENCIONAL no campo Tipo de Assento.");
+                    alertaErro.show(); 
+                    verificaPassagem = false;
+        }
         
-        switch (assentoTipo) {
-            case "TotalReclinavel":
-              verificaPassagem = true;
-              break;
-                        
-            case "Reclinavel":
-              verificaPassagem = true;
-              break;
-                
-            case "Obeso":
-                verificaPassagem = true;
-                break;
-                
-            case "Convencional":
-                verificaPassagem = true;
-                break;
+        switch(tarifa){
+                case "INTERMUNICIPAL":
+                    eDentroDoEstado = true;
+                    break;
+                case "INTERESTADUAL":
+                    eDentroDoEstado = false;
+                    break;
+                default:
+                    alertaErro.setHeaderText("Insira apenas INTERMUNICIPAL ou INTERESTADUAL no campo Tipo de Tarifa.");
+                    alertaErro.show(); 
+                    verificaPassagem = false;
+            }
+        
+        switch(tipoDeGratuidade){
+                case "IDOSO":
+                    break;
+                case "IDJOVEM":
+                    break;
+                case "PARCIAL IDOSO":
+                    break;
+                case "PARCIAL IDJOVEM":
+                    break;
+                case "NORMAL":
+                    verificaPassagem = true;
+                    break;
+                default:
+                    alertaErro.setHeaderText("Insira apenas IDOSO, IDJOVEM, PARCIAL IDOSO, PARCIAL IDJOVEM ou NORMAL no campo Tipo de Gratuidade.");
+                    alertaErro.show();
+                    verificaPassagem = false;
+            }
+        
+        switch (lanche) {
+                case "SIM":
+                  possuiServicoBordo = true;
 
-            default:
-                alertaErro.setContentText("Erro ao preencher os dados!");
-                alertaErro.show();
-                verificaPassagem = false;
-        }        
-        // ----------------
-        
-        if(Municipal.isSelected()){
-            eDentroDoEstado = true;
-        }
-        else if(Estadual.isSelected()){
-            eDentroDoEstado = false;
-        }
-        
-        
-        if(PossuiLanche.isSelected()){
-            possuiCriancaColo = true;
-        }
-        else if(NaoPossuiLanche.isSelected()){
-            possuiCriancaColo = false;
-        }
-        
-        
-        if(PossuiCriancaColo.isSelected()){
-            possuiServicoBordo = true;
-        }
-        else if(NaoPossuiCriancaColo.isSelected()){
-            possuiServicoBordo = false;
-        }
-        
-        else if(!Municipal.isSelected() || !Estadual.isSelected() || !PossuiLanche.isSelected() || !NaoPossuiLanche.isSelected() || !PossuiCriancaColo.isSelected() || !NaoPossuiCriancaColo.isSelected()){
-                alertaErro.setContentText("Alguns dados não fora preenchidos!");
-                alertaErro.show();
-                verificaPassagem = false;
-        }
-        // -----------------------
-            
-        
-        
-        
+                  break;
+
+                case "NÃO":
+                  possuiServicoBordo = false;
+
+                  break;
+                case "NAO":
+                    possuiServicoBordo = false;
+
+                    break;
+                default:
+                    alertaErro.setHeaderText("Insira apenas SIM ou NÃO no campo Serviço de Bordo.");
+                    alertaErro.show();
+                    verificaPassagem = false;
+            }
+                   
+                              
+            switch (criancaColo) {
+                case "SIM":
+                  possuiCriancaColo = true;
+                  break;
+
+                case "NÃO":
+                  possuiCriancaColo = false;
+                  break;
+                case "NAO":
+                    possuiCriancaColo = false;
+                    break;
+                default:
+                    alertaErro.setHeaderText("Insira apenas SIM ou NÃO no campo Dependentes.");
+                    alertaErro.show();
+                    verificaPassagem = false;
+            }
+
         if (verificaPassagem) {
             try {
-               
                 int codigo;
                 
                 codigo = fachadaFuncionario.adicionarPassagem(verificaCPF, precoDouble, eDentroDoEstado, codigoPoltrona, assentoTipo, tipoDeGratuidade, possuiCriancaColo, possuiServicoBordo);
@@ -242,9 +256,6 @@ public class CadastrarPassagemController implements Initializable {
  
     }
 
-    @FXML
-    private void Voltar(ActionEvent event) {
-    }
 
 }
 
