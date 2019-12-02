@@ -77,5 +77,8 @@ public class NegocioPassagem {
         throw new PassagemNaoExisteException();
         
     }
+    public List<Passagem> listagemPassagem() {
+        return repositorio.listagemPassagem();
+    }
   
 }
