@@ -176,6 +176,14 @@ public class AlterarOnibusController implements Initializable {
         
         
         String novaPlaca = placaOnibus.getText();
+        
+        if(novaPlaca.isEmpty()){
+            verificaDados = false;
+            alertaErro.setHeaderText("Placa vazia");
+            alertaErro.show();
+            return;
+            
+        }
         verificaDados = true;
         
         Onibus exOnibus = fachadaGerente.procurarOnibus(novaPlaca);
