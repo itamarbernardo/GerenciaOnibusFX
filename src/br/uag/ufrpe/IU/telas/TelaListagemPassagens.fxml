@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.ListagemPassagensController">
+   <children>
+      <TableView fx:id="tablePassagem" layoutX="38.0" layoutY="78.0" prefHeight="299.0" prefWidth="855.0">
+        <columns>
+          <TableColumn fx:id="colunaCodigo" prefWidth="75.0" text="Código" />
+          <TableColumn fx:id="colunaPassageiro" prefWidth="174.0" text="Passageiro" />
+            <TableColumn fx:id="colunaPreco" prefWidth="65.0" text="Preco" />
+            <TableColumn fx:id="colunaTarifa" prefWidth="105.0" text="Tarifa" />
+            <TableColumn fx:id="colunaNumeroPoltrona" prefWidth="94.0" text="Número Assento" />
+            <TableColumn fx:id="colunaTipoAssento" prefWidth="103.0" text="Tipo de Assento" />
+            <TableColumn fx:id="colunaTipoPassagem" prefWidth="75.0" text="Tipo de Passagem" />
+            <TableColumn fx:id="colunaLanche" prefWidth="108.0" text="Servico de Bordo" />
+            <TableColumn fx:id="colunaDependentes" minWidth="6.0" prefWidth="77.0" text="Dependentes" />
+        </columns>
+      </TableView>
+      <Label layoutX="282.0" layoutY="20.0" text="Listagem de Passagens Cadastradas">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
