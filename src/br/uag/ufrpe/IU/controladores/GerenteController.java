@@ -347,6 +347,80 @@ public class GerenteController implements Initializable {
         }
     }
     
+    @FXML
+    void cadastrarOnibus(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarOnibus.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void alterarOnibus(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarOnibus.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void listagemOnibus(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemOnibus.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    void cadastrarMotorista(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarMotorista.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void alterarMotorista(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarMotorista.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void removerMotorista(ActionEvent event) {
+        paneTelas.getChildren().clear(); 
+        
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaRemoverMotorista.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
