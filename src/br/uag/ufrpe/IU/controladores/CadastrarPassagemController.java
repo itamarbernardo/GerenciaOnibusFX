@@ -110,16 +110,7 @@ public class CadastrarPassagemController implements Initializable {
             verificaPassagem = false;
         }
         
-        
-        Passageiro verificaCPF  = fachadaFuncionario.procurarPassageiro(cpf);
-                
-        if(verificaCPF == null){
-            alertaErro.setContentText("Erro! CPF não existe.");
-            alertaErro.show();
-            verificaPassagem = false;
-            return;
-        }
-        
+         
         if(preco.isEmpty()){
             alertaErro.setContentText("Erro! Campo preço de passagem vazio");
             alertaErro.show();
@@ -237,7 +228,7 @@ public class CadastrarPassagemController implements Initializable {
             try {
                 int codigo;
                 
-                codigo = fachadaFuncionario.adicionarPassagem(verificaCPF, precoDouble, eDentroDoEstado, codigoPoltrona, assentoTipo, tipoDeGratuidade, possuiCriancaColo, possuiServicoBordo);
+                codigo = fachadaFuncionario.adicionarPassagem(cpf, precoDouble, eDentroDoEstado, codigoPoltrona, assentoTipo, tipoDeGratuidade, possuiCriancaColo, possuiServicoBordo);
                 alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
                 alertaConfirmacao.setContentText("Passagem cadastrada com sucesso!\nCódigo da Passagem: " + codigo);
                 alertaConfirmacao.show();

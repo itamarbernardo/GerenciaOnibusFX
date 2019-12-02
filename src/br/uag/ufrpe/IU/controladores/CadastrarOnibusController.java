@@ -8,9 +8,15 @@ package br.uag.ufrpe.IU.controladores;
 import br.uag.ufrpe.negocio.entidades.Funcionario;
 import br.uag.ufrpe.negocio.entidades.Motorista;
 import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
+import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaNaoExisteException;
+import br.uag.ufrpe.negocio.excecoes.onibus.OnibusJaExisteException;
 import br.uag.ufrpe.negocio.fachada.FachadaGerente;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +30,7 @@ import javafx.scene.control.TextField;
  * @author miyyu
  */
 public class CadastrarOnibusController implements Initializable {
-    
+
     private FachadaGerente fachadaGerente;
 
     @FXML
@@ -34,52 +40,70 @@ public class CadastrarOnibusController implements Initializable {
     @FXML
     private TextField motorista;
 
-    /**
-     * Initializes the controller class.
-     */
+    public CadastrarOnibusController() {
+        this.fachadaGerente = FachadaGerente.getFachadaGerente();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void CadastrarOnibus(ActionEvent event) throws FuncionarioNaoEncontradoException {
-        
+    private void cadastrarOnibus(ActionEvent event){
+
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");
-        
+
         Alert alertaConfirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         alertaConfirmacao.setTitle("Confirmação");
         alertaConfirmacao.setHeaderText("Passagem Cadastrada com sucesso!");
-        
-        boolean verificaPassagem = true;
 
-        String cpf = motorista.getText();
-        
-        if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*") ){
-            alertaErro.setContentText("Erro ao preencher os dados!");
+        boolean verifica = true;
+
+        String carteiraMotorista = motorista.getText();
+
+        String placa = PlacaOnibus.getText();
+        int totalPoltronas = 0;
+        try {
+            totalPoltronas = Integer.parseInt(TotalPoltronas.getText());
+        } catch (Exception ex) {
+            verifica = false;
+            alertaErro.setContentText("Digite um número inteiro de poltronas!");
             alertaErro.show();
-            verificaPassagem = false;
+
         }
-        
-        Funcionario verificaCPF = fachadaGerente.procurarFuncionario(cpf);
-        
-        if(verificaCPF == null){
-            alertaErro.setContentText("Erro! CPF não existe.");
+
+        List<Integer> poltronasObeso = new ArrayList<>();
+        poltronasObeso.add(1);
+        poltronasObeso.add(5);
+
+        List<Integer> poltronasTotalReclinavel = new ArrayList<>();
+        poltronasTotalReclinavel.add(2);
+        poltronasTotalReclinavel.add(7);
+
+        List<Integer> poltronasReclinavel = new ArrayList<>();
+        poltronasReclinavel.add(8);
+        poltronasReclinavel.add(10);
+
+        if (verifica == true) {
+            try {
+                fachadaGerente.adicionarOnibus(carteiraMotorista, placa, totalPoltronas, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
+                alertaConfirmacao.setContentText("Onibus cadastrado com sucesso!");
+                alertaConfirmacao.show();
+            } catch (Exception ex) {
+                alertaErro.setContentText(ex.getMessage());
+                alertaErro.show();
+            }
+        }
+        else{
+            alertaErro.setContentText("Alguns dados estão incorretos!");
             alertaErro.show();
-            verificaPassagem = false;
         }
-        
-        
-        
-        PlacaOnibus.getText();        
-        TotalPoltronas.getText();
 
     }
 
-    @FXML
-    private void Voltar(ActionEvent event) {
-    }
-    
+
+
 }

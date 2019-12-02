@@ -249,16 +249,16 @@ public class FachadaFuncionario {
     
     
     
-    public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
+    public int adicionarPassagem(String cpf, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
         Passageiro verificaPassageiro;
-        verificaPassageiro = procurarPassageiro(passageiro.getCpf());
+        verificaPassageiro = procurarPassageiro(cpf);
         
         if(verificaPassageiro == null){
             throw new PassageiroNaoExisteException();
         }
         else{
         
-            Passagem passagem = new Passagem(passageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem, lanche, criancaColo);
+            Passagem passagem = new Passagem(verificaPassageiro, preco, eDentroDoEstado, codigoPoltrona, tipoDeAssento, tipoDePassagem, lanche, criancaColo);
             negocioPassagem.adicionarPassagem(passagem);
             return passagem.getCodigo();
         }

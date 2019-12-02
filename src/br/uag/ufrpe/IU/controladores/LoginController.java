@@ -89,8 +89,7 @@ public class LoginController implements Initializable {
         }
            try {
                 funcionario = fachadaGerente.procurarFuncionario(cpf);
-                func = fachadaGerente.autenticaFuncionario(senha);
-                if(funcionario != null || func != null){
+                if(funcionario != null){
                     alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
                     alertaConfirmacao.setContentText("Autenticado");
                     alertaConfirmacao.show();

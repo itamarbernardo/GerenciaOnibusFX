@@ -251,26 +251,24 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         return getNegocioFuncionario().listagemFuncionarios();
     }
     
-    public void adicionarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws FuncionarioNaoEncontradoException, OnibusNaoExisteException, OnibusJaExisteException{
-        Funcionario verificaMotorista;
-        verificaMotorista = procurarFuncionario(motorista.getCpf());
-        Onibus verificaOnibus;
-        verificaOnibus = procurarOnibus(placa);
+    public void adicionarOnibus(String numeroCarteira, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws OnibusJaExisteException, MotoristaNaoExisteException{
+        Motorista verificaMotorista = procurarMotorista(numeroCarteira);
+        Onibus verificaOnibus = procurarOnibus(placa);
         
         if(verificaMotorista != null){
             
             if(verificaOnibus != null){                
-                Onibus onibus = new Onibus(motorista, placa, totalPoltronas, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
+                Onibus onibus = new Onibus(verificaMotorista, placa, totalPoltronas, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
                 negocioOnibus.adicionarOnibus(onibus);
             }
             
             else{
-                throw new OnibusNaoExisteException();
+                throw new OnibusJaExisteException();
             }
          }    
             
         else{
-            throw new FuncionarioNaoEncontradoException();
+            throw new MotoristaNaoExisteException();
             
         }
  
@@ -280,14 +278,14 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         return negocioOnibus.procurarOnibus(placa);
     }
     
-    public void alterarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws OnibusNaoExisteException, FuncionarioNaoEncontradoException{
+    public void alterarOnibus(String numeroCarteira, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws OnibusNaoExisteException, FuncionarioNaoEncontradoException{
         Onibus onibus = negocioOnibus.procurarOnibus(placa);
-        Funcionario verificaMotorista = getNegocioFuncionario().procurarFuncionario(motorista.getCpf());
+        Motorista verificaMotorista = negocioMotorista.procurarMotorista(numeroCarteira);
         
         if(onibus != null){
             
             if(verificaMotorista != null){
-                onibus.setMotorista(motorista);
+                onibus.setMotorista(verificaMotorista);
                 onibus.setPlaca(placa);
                 onibus.setTotalPoltronas(totalPoltronas);
                 onibus.setPoltronas(poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);                

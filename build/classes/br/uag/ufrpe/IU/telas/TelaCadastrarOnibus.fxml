@@ -29,7 +29,7 @@
       <TextField layoutX="260.0" layoutY="378.0" />
       <TextField layoutX="61.0" layoutY="493.0" />
       <TextField layoutX="260.0" layoutY="493.0" />
-      <Button layoutX="446.0" layoutY="590.0" mnemonicParsing="false" onAction="#CadastrarOnibus" text="Cadastrar">
+      <Button layoutX="446.0" layoutY="590.0" mnemonicParsing="false" onAction="#cadastrarOnibus" text="Cadastrar">
          <font>
             <Font size="19.0" />
          </font>
@@ -53,6 +53,5 @@
             <TextField fx:id="motorista" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="64.0" layoutY="597.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
    </children>
 </AnchorPane>
