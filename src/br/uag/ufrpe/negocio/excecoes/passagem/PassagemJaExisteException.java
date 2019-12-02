@@ -7,7 +7,7 @@ package br.uag.ufrpe.negocio.excecoes.passagem;
 
 /**
  *
- * @author miyyu
+ * @author EMily SAntos
  */
 public class PassagemJaExisteException extends Exception {
     
