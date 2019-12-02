@@ -334,5 +334,10 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
             throw new OnibusNaoExisteException();
         }
     }
+    
+    public List<Onibus> listagemOnibus(){
+        return negocioOnibus.listagemOnibus();
+    }
+
 
 }
