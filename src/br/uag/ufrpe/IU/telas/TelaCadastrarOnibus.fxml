@@ -16,20 +16,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="186.0" layoutY="271.0" text="Seleção de Poltronas Especiais">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="350.0" text="Obeso" />
-      <Label layoutX="61.0" layoutY="350.0" text="Convencional" />
-      <Label layoutX="61.0" layoutY="461.0" text="Reclinável" />
-      <Label layoutX="260.0" layoutY="461.0" text="Totalmente Reclinável" />
-      <TextField layoutX="61.0" layoutY="378.0" />
-      <TextField layoutX="260.0" layoutY="378.0" />
-      <TextField layoutX="61.0" layoutY="493.0" />
-      <TextField layoutX="260.0" layoutY="493.0" />
-      <Button layoutX="446.0" layoutY="590.0" mnemonicParsing="false" onAction="#CadastrarOnibus" text="Cadastrar">
+      <Button layoutX="337.0" layoutY="297.0" mnemonicParsing="false" onAction="#CadastrarOnibus" text="Cadastrar">
          <font>
             <Font size="19.0" />
          </font>
@@ -53,6 +40,6 @@
             <TextField fx:id="motorista" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="64.0" layoutY="597.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
+      <Button layoutX="191.0" layoutY="304.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
    </children>
 </AnchorPane>
