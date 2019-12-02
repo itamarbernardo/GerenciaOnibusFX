@@ -88,7 +88,9 @@ public class CadastrarPassageiroController implements Initializable {
         if(labelPassageiroIdJovemS.isSelected()){
             idJovem = true;
         }
-        idJovem = false;
+        else{
+            idJovem = false;
+        }
         
         if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*") ){
             erroCpf.setText("CPF invalido ou insuficiente");
