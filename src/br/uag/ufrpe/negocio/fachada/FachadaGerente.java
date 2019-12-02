@@ -231,7 +231,10 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         funcionario.getEndereco().setCidade(cidade);
         funcionario.getEndereco().setEstado(estado);
     }
-
+ 
+    public Funcionario autenticaFuncionario(String senha){
+        return negocioFuncionario.autenticarFuncionario(senha);
+    }
 
     public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
         return negocioFuncionario.procurarFuncionario(cpf);
