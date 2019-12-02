@@ -309,8 +309,9 @@ public class FachadaFuncionario {
             negocioPassagem.removerPassagem(codigoPassagem);
         }
         
-    }      
-
-
-
+    }
+        
+    public List<Passagem> listagemPassagem() {
+        return negocioPassagem.listagemPassagem();
+    }
 }
