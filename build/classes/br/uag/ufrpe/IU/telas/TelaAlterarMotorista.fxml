@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="428.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.telas.TelaAlterarMotoristaController">
+<AnchorPane id="AnchorPane" prefHeight="428.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.AlterarMotoristaController">
    <children>
       <TextField fx:id="txtNomeMotorista" layoutX="100.0" layoutY="87.0" />
       <Label fx:id="nomeMotorista" layoutX="24.0" layoutY="87.0" prefHeight="25.0" prefWidth="58.0" text="  Nome">

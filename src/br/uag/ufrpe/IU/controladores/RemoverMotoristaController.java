@@ -41,7 +41,7 @@ public class RemoverMotoristaController implements Initializable {
  
 
     @FXML
-    private void removerMotorista(ActionEvent event) throws MotoristaNaoExisteException {
+    public void removerMotorista(ActionEvent event) throws MotoristaNaoExisteException {
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");

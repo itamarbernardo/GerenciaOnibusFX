@@ -42,7 +42,7 @@ public class CadastrarOnibusController implements Initializable {
     }
 
 
-    private void CadastrarOnibus(ActionEvent event) {
+    public void CadastrarOnibus(ActionEvent event) {
         
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
