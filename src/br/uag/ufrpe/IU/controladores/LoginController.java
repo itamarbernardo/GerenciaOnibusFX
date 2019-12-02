@@ -6,7 +6,10 @@
 
 package br.uag.ufrpe.IU.controladores;
 
+import br.uag.ufrpe.IU.GUIFuncionario;
 import br.uag.ufrpe.negocio.entidades.Funcionario;
+import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
+import br.uag.ufrpe.negocio.fachada.FachadaFuncionario;
 import br.uag.ufrpe.negocio.fachada.FachadaGerente;
 import java.awt.TextField;
 import java.net.URL;
@@ -25,8 +28,9 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author GABRIEL
  */
-public class LoginController implements Initializable {
+public class LoginController  {
     private FachadaGerente fachadaGerente;
+    private FachadaFuncionario fachadaFuncionario; 
     
     @FXML
     private Label senha;
@@ -57,10 +61,11 @@ public class LoginController implements Initializable {
 
      public LoginController(){
         fachadaGerente = FachadaGerente.getFachadaGerente();
+        fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
     }  
 
     @FXML
-    private void entrar(ActionEvent event) {
+    private void entrar(ActionEvent event) throws FuncionarioNaoEncontradoException {
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");
@@ -71,14 +76,14 @@ public class LoginController implements Initializable {
         
         String cpf = txtLongin.getText();
         String senha = txtSenha.getText();
-        boolean gerente = true; 
-        Funcionario funcionario; 
-        Funcionario func;
+        RadioButton gerente = (RadioButton) grup.getSelectedToggle();
+        boolean egerente = true; 
         boolean verifica = true; 
         
-         if(labelGerente.isSelected()){
-            gerente = true;
-        } 
+        if(gerente.getText() == "não"){
+             egerente = false; 
+        }
+      
          if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*")){
             erroCpf.setText("Longin invalido");
             verifica = false;
@@ -87,28 +92,31 @@ public class LoginController implements Initializable {
             erroSenha.setText("Senha invalida ou muito curta");
             verifica = false;
         }
-           try {
-                funcionario = fachadaGerente.procurarFuncionario(cpf);
-                func = fachadaGerente.autenticaFuncionario(senha);
-                if(funcionario != null || func != null){
+          try{
+            if(egerente == true){    
+                if(fachadaGerente.auntenticar(cpf, senha) == true){
                     alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                    alertaConfirmacao.setContentText("Autenticado");
+                    alertaConfirmacao.setContentText("Usuário aceito");
                     alertaConfirmacao.show();
-                }else {
-                alertaErro.setContentText("Usuário não encontrada!");
-                alertaErro.show();
-            }
-         } catch (Exception ex) {
+                }else{
+                    alertaErro.setContentText("Usuário não encontrada");
+                    alertaErro.show();
+                }}
+            else{
+                 if(fachadaFuncionario.auntenticar(cpf, senha) == true){
+                    alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
+                    alertaConfirmacao.setContentText("Usuário aceito");
+                    alertaConfirmacao.show();  
+                    } else{
+                    alertaErro.setContentText("Usuário não encontrada");
+                    alertaErro.show();
+                 }  
+          }}catch (Exception ex) {
+            System.out.println(ex.getMessage());
             ex.printStackTrace();
-            alertaErro.setContentText(ex.getMessage());
-            alertaErro.show();
-        }
-          
-    }
-    
-     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }  
-    
+            erroCpf.setText("Entrada invalida");
+          }
+      
+
+}
 }
