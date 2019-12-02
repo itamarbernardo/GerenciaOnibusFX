@@ -309,6 +309,20 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         
         
     }
+       public boolean auntenticar(String cpf, String senha)  throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        if(funcionario == null){
+             throw new FuncionarioNaoEncontradoException();
+        }else{
+            if(funcionario.getSenha() == senha){
+                if(funcionario.eGerente() == true){
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
+    
     
     public void removerOnibus(String placa) throws OnibusNaoExisteException{
         Onibus onibus = negocioOnibus.procurarOnibus(placa);
