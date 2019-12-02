@@ -245,6 +245,8 @@ public class FachadaFuncionario {
         return negocioPassageiro.listagemPassageiros();
     }
     
+    
+    
     public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
         Passageiro verificaPassageiro;
         verificaPassageiro = procurarPassageiro(passageiro.getCpf());
@@ -275,7 +277,7 @@ public class FachadaFuncionario {
         if(p != null){
                        
             if(passagem != null){
-                passagem.setPassageiro(p);
+                //passagem.setPassageiro(p);
                 passagem.setPreco(preco);
                 passagem.seteDentroDoEstado(eDentroDoEstado);
                 passagem.setCodigoPoltrona(codigoPoltrona);
@@ -291,7 +293,7 @@ public class FachadaFuncionario {
         }
         
         else{
-            throw new PassageiroNaoExisteException();
+          throw new PassageiroNaoExisteException();
         }       
        
     }
@@ -307,7 +309,7 @@ public class FachadaFuncionario {
             negocioPassagem.removerPassagem(codigoPassagem);
         }
         
-    }   
+    }      
 
 
 
