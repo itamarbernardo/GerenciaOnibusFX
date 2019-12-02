@@ -25,7 +25,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author miyyu
+ * @author Emily SAntos
  */
 public class CadastrarOnibusController implements Initializable {
     
