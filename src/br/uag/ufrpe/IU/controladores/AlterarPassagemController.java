@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author miyyu
+ * @author Emily Santos
  */
 public class AlterarPassagemController implements Initializable {
 
