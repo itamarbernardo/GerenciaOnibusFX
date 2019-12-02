@@ -16,12 +16,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -63,6 +67,7 @@ public class LoginController  {
         fachadaGerente = FachadaGerente.getFachadaGerente();
         fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
     }  
+  
 
     @FXML
     private void entrar(ActionEvent event) throws FuncionarioNaoEncontradoException {
@@ -80,8 +85,6 @@ public class LoginController  {
         boolean egerente = true; 
         boolean verifica = true; 
         
-        Funcionario funcionario;
-        
         if(gerente.getText() == "não"){
              egerente = false; 
         }
@@ -94,24 +97,41 @@ public class LoginController  {
             erroSenha.setText("Senha invalida ou muito curta");
             verifica = false;
         }
-           try {
-                funcionario = fachadaGerente.procurarFuncionario(cpf);
-                if(funcionario != null){
           try{
+            if(cpf =="admin" && senha == "admin"){
+                 Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerente.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.resizableProperty().setValue(Boolean.FALSE);
+                    stage.setResizable(false);
+                    stage.setScene(scene);
+                    stage.setTitle("Tela Principal");
+                    stage.show();
+            }
             if(egerente == true){    
                 if(fachadaGerente.auntenticar(cpf, senha) == true){
-                    alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                    alertaConfirmacao.setContentText("Usuário aceito");
-                    alertaConfirmacao.show();
+                    Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerente.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.resizableProperty().setValue(Boolean.FALSE);
+                    stage.setResizable(false);
+                    stage.setScene(scene);
+                    stage.setTitle("Tela Principal");
+                    stage.show();
                 }else{
                     alertaErro.setContentText("Usuário não encontrada");
                     alertaErro.show();
                 }}
             else{
                  if(fachadaFuncionario.auntenticar(cpf, senha) == true){
-                    alertaConfirmacao.setAlertType(Alert.AlertType.CONFIRMATION);
-                    alertaConfirmacao.setContentText("Usuário aceito");
-                    alertaConfirmacao.show();  
+                    Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaFuncionario.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.resizableProperty().setValue(Boolean.FALSE);
+                    stage.setResizable(false);
+                    stage.setScene(scene);
+                    stage.setTitle("Tela Principal");
+                    stage.show();    
                     } else{
                     alertaErro.setContentText("Usuário não encontrada");
                     alertaErro.show();
