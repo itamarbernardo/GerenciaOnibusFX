@@ -310,6 +310,19 @@ public class FachadaFuncionario {
         }
         
     }
+     public boolean auntenticar(String cpf, String senha)  throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        if(funcionario == null){
+             throw new FuncionarioNaoEncontradoException();
+        }else{
+            if(funcionario.getSenha() == senha){
+                if(funcionario.eGerente() == true){
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
         
     public List<Passagem> listagemPassagem() {
         return negocioPassagem.listagemPassagem();
