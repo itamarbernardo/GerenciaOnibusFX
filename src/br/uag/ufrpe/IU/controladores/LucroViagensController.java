@@ -92,9 +92,6 @@ public class LucroViagensController implements Initializable {
 
     }
 
-    public void voltar(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

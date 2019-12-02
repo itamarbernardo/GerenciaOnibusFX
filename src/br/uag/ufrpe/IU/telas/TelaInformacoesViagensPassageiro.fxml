@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.InformacoesViagensPassageiroController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.uag.ufrpe.IU.controladores.InformacoesViagensPassageiroController">
    <children>
       <Label layoutX="27.0" layoutY="144.0" text="Procurar últimas viagens de um passageiro" />
       <Label layoutX="27.0" layoutY="174.0" text="CPF:" />
@@ -20,6 +20,5 @@
       <TextArea fx:id="txtArea" layoutX="13.0" layoutY="226.0" prefHeight="120.0" prefWidth="576.0" />
       <Button fx:id="buscarViagens" layoutX="253.0" layoutY="170.0" mnemonicParsing="false" onAction="#ultimasViagens" text="Buscar" />
       <Button fx:id="estaNaViagem" layoutX="497.0" layoutY="131.0" mnemonicParsing="false" onAction="#estaNaViagem" text="Buscar" />
-      <Button fx:id="voltar" layoutX="511.0" layoutY="361.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
    </children>
 </AnchorPane>

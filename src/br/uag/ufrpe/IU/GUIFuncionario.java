@@ -7,6 +7,7 @@
 package br.uag.ufrpe.IU;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,14 +17,16 @@ import javafx.stage.Stage;
  *
  * @author Itamar Jr
  */
-public class ConstrucaoGUIGerenciaOnibus extends Application {
-    
+public class GUIFuncionario extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemViagens.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaFuncionario.fxml"));
+
         Scene scene = new Scene(root);
         
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Tela Principal");
         stage.show();
@@ -35,5 +38,5 @@ public class ConstrucaoGUIGerenciaOnibus extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

@@ -19,63 +19,19 @@ import javafx.scene.layout.Pane;
  *
  * @author Itamar Jr
  */
-public class GerenteController implements Initializable {
+public class FuncionarioController implements Initializable {
 
     private Pane pane;
-    
+
     @FXML
     private Pane paneTelas;
     @FXML
     private AnchorPane paneTelaAtual;
 
     @FXML
-    public void cadastrarViagem() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastroViagem.fxml"));
-            paneTelas.getChildren().addAll(pane);            
-            
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    public void alterarViagem() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaProcurarAlterarRemoverViagem.fxml"));
-            paneTelas.getChildren().addAll(pane);
-            
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-
-    }
-
-    @FXML
-    public void removerViagem() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaProcurarAlterarRemoverViagem.fxml"));
-            paneTelas.getChildren().addAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
     public void procurarViagem() {
-        paneTelas.getChildren().clear();            
-            
+        paneTelas.getChildren().clear();
+
         try {
             pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaProcurarViagem.fxml"));
             paneTelas.getChildren().addAll(pane);
@@ -87,23 +43,10 @@ public class GerenteController implements Initializable {
 
     @FXML
     public void listarViagens() {
-        paneTelas.getChildren().clear();            
-            
+        paneTelas.getChildren().clear();
+
         try {
             pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemViagens.fxml"));
-            paneTelas.getChildren().addAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    public void gerenciarDescontoPassagens() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerenciarDescontoPassagens.fxml"));
             paneTelas.getChildren().addAll(pane);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -117,45 +60,6 @@ public class GerenteController implements Initializable {
             
         try {
             pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaInformacoesViagensPassageiro.fxml"));
-            paneTelas.getChildren().addAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    public void porcentagemPassageirosViagem() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaPorcentagemPassageirosViagens.fxml"));
-            paneTelas.getChildren().addAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    public void porcentagemLancheViagem() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaPorcentagemLancheViagens.fxml"));
-            paneTelas.getChildren().addAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    public void lucroViagens() {
-        paneTelas.getChildren().clear();            
-            
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaLucroViagens.fxml"));
             paneTelas.getChildren().addAll(pane);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -214,6 +118,7 @@ public class GerenteController implements Initializable {
         }
 
     }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

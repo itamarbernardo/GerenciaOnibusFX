@@ -28,11 +28,10 @@
       <Label fx:id="erroDatasHoras" layoutX="338.0" layoutY="273.0" textFill="#f50505" />
       <Label fx:id="erroHoraSaida" layoutX="311.0" layoutY="237.0" textFill="#f50505" />
       <Label fx:id="erroHoraChegada" layoutX="311.0" layoutY="310.0" textFill="#f20404" />
-      <Button fx:id="alterarViagem" layoutX="466.0" layoutY="396.0" onAction="#alterarViagem"  mnemonicParsing="false" text="Alterar" />
+      <Button fx:id="alterarViagem" layoutX="466.0" layoutY="396.0" mnemonicParsing="false" onAction="#alterarViagem" text="Alterar" />
       <Label layoutX="23.0" layoutY="62.0" text="Código da Viagem" />
       <TextField fx:id="txtCodigoViagem" layoutX="151.0" layoutY="58.0" />
       <Label fx:id="erroCodigo" layoutX="311.0" layoutY="62.0" textFill="#fc0707" />
       <Button fx:id="removerViagem" layoutX="311.0" layoutY="396.0" mnemonicParsing="false" onAction="#removerViagem" text="Remover" />
-      <Button fx:id="voltar" layoutX="247.0" layoutY="396.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
     </children>
 </AnchorPane>
