@@ -6,6 +6,7 @@ import br.uag.ufrpe.negocio.excecoes.onibus.OnibusJaExisteException;
 import br.uag.ufrpe.dados.IRepositorioOnibus;
 import br.uag.ufrpe.dados.RepositorioOnibus;
 import br.uag.ufrpe.negocio.entidades.Onibus;
+import java.util.List;
 
 /**
  *
@@ -58,6 +59,10 @@ public class NegocioOnibus {
             repositorio.removerOnibus(placa);
         }
         throw new OnibusNaoExisteException();
+    }
+       
+    public List<Onibus> listagemOnibus(){
+        return repositorio.listagemOnibus();
     }
     
 }
