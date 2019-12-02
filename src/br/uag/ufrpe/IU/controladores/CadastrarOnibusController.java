@@ -5,29 +5,21 @@
  */
 package br.uag.ufrpe.IU.controladores;
 
-import br.uag.ufrpe.negocio.entidades.Funcionario;
-import br.uag.ufrpe.negocio.entidades.Motorista;
-import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
-import br.uag.ufrpe.negocio.excecoes.motorista.MotoristaNaoExisteException;
-import br.uag.ufrpe.negocio.excecoes.onibus.OnibusJaExisteException;
 import br.uag.ufrpe.negocio.fachada.FachadaGerente;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author miyyu
+ * @author Emily SAntos
  */
 public class CadastrarOnibusController implements Initializable {
 
@@ -49,9 +41,9 @@ public class CadastrarOnibusController implements Initializable {
         // TODO
     }
 
-    @FXML
-    private void cadastrarOnibus(ActionEvent event){
 
+    private void CadastrarOnibus(ActionEvent event) {
+        
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");
@@ -101,7 +93,7 @@ public class CadastrarOnibusController implements Initializable {
             alertaErro.setContentText("Alguns dados estão incorretos!");
             alertaErro.show();
         }
-
+        
     }
 
 

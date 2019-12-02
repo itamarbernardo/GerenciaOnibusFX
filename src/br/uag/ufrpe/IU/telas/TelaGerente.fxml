@@ -47,11 +47,21 @@
                   <MenuItem mnemonicParsing="false" onAction="#listagemFuncionarios" text="Listar Funcionarios" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
+                <Menu mnemonicParsing="false" text="Passagem">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#listagemPassagens" text="Listagem de Passagens" />
+                  <MenuItem mnemonicParsing="false" onAction="#alterarPassagem" text="Alterar / Remover" />
+                  <MenuItem mnemonicParsing="false" onAction="#cadastrarPassagem" text="Cadastrar" />
+               </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Passageiro">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#listagemPassageiros" text="Listagem Passageiros" />
+                  <MenuItem mnemonicParsing="false" onAction="#removerPassageiro" text="Remover" />
+                  <MenuItem mnemonicParsing="false" onAction="#procurarPassageiro" text="Procurar/Alterar" />
+                  <MenuItem mnemonicParsing="false" onAction="#cadastrarPassageiro" text="Cadastrar" />
+               </items>
+            </Menu>
             </menus>
         </MenuBar>
         <Pane fx:id="paneTelas" layoutX="2.0" layoutY="34.0" prefHeight="436.0" prefWidth="618.0">

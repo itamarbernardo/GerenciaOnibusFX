@@ -7,7 +7,7 @@ package br.uag.ufrpe.negocio.excecoes.onibus;
 
 /**
  *
- * @author miyyu
+ * @author EMily SAntos
  */
 public class OnibusNaoExisteException extends Exception {
     

@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author michel
+ * @author EMily SAntos
  */
 public class AlterarOnibusController implements Initializable {
     
