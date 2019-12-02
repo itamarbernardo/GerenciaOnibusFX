@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Interface responsavel pelos contratos do RepositorioPassagem
- * @author Jackson
+ * @author EMily SAntos
  */
 
 public interface IRepositorioPassagem {
