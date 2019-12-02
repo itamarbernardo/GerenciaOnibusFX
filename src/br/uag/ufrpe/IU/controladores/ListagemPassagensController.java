@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * FXML Controller class
  *
- * @author miyyu
+ * @author EMily SAntos
  */
 public class ListagemPassagensController implements Initializable {
 
