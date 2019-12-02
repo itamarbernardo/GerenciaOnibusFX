@@ -8,7 +8,9 @@ package br.uag.ufrpe.IU.controladores;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemNaoExisteException;
 import br.uag.ufrpe.negocio.fachada.FachadaFuncionario;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -37,30 +39,63 @@ import static jdk.nashorn.internal.objects.NativeObject.keys;
  */
 public class ListarPoltronasViagemController implements Initializable {
 
+    public class Poltrona {
+
+        private int codigo;
+        private String tipo;
+
+        public Poltrona(int codigo, String tipo) {
+            this.codigo = codigo;
+            this.tipo = tipo;
+        }
+
+        public int getCodigo() {
+            return codigo;
+        }
+
+        public void setCodigo(int codigo) {
+            this.codigo = codigo;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        @Override
+        public String toString() {
+            return "Poltrona{" + "codigo=" + codigo + ", tipo=" + tipo + '}';
+        }
+
+    }
+
     private FachadaFuncionario fachadaFuncionario;
 
     @FXML
-    private TableView tableViewPoltronas;
-    
+    private TableView<Poltrona> tableViewPoltronas;
 
     @FXML
-    private TableColumn<Map, Integer> colunaCodigoPoltrona;
+    private TableColumn<Poltrona, Integer> colunaCodigoPoltrona;
 
     @FXML
-    private TableColumn<Map, String> colunaTipoPoltrona;
+    private TableColumn<Poltrona, String> colunaTipoPoltrona;
 
     @FXML
     private TextField txtCodigoViagem;
 
     private Map<Integer, String> poltronas;
 
-    //private ObservableMap<Integer, String> observablePoltronas;
+    private List<Poltrona> poltronasList;
 
-    private ObservableList<Map> observablePoltronas;
+    private ObservableList<Poltrona> observablePoltronas;
 
-    
     public ListarPoltronasViagemController() {
         this.fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
+        poltronasList = new ArrayList<>();
+
     }
 
     public void preencherTabela(ActionEvent event) {
@@ -78,14 +113,17 @@ public class ListarPoltronasViagemController implements Initializable {
         }
         if (codigo != -1) {
             try {
-                colunaCodigoPoltrona.setCellValueFactory(new MapValueFactory("Key"));
-                colunaTipoPoltrona.setCellValueFactory(new MapValueFactory("Value"));
-
+                
                 poltronas = fachadaFuncionario.listaPoltronasDaViagem(codigo);
+                
+                colunaCodigoPoltrona.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                colunaTipoPoltrona.setCellValueFactory(new PropertyValueFactory<>("tipo"));;
 
-                observablePoltronas = FXCollections.observableArrayList(poltronas);
+                popularArrayPoltronas();
+
+                observablePoltronas = FXCollections.observableArrayList(poltronasList);
                 tableViewPoltronas.setItems(observablePoltronas);
-            } catch (ViagemNaoExisteException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 alertaErro.setContentText(ex.getMessage());
                 alertaErro.show();
@@ -94,6 +132,16 @@ public class ListarPoltronasViagemController implements Initializable {
         }
     }
 
+    
+    public void popularArrayPoltronas() {
+        Poltrona poltrona;
+
+        for (Map.Entry<Integer, String> quantidade : poltronas.entrySet()) {
+            poltrona = new Poltrona(quantidade.getKey(), quantidade.getValue());
+            poltronasList.add(poltrona);
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
