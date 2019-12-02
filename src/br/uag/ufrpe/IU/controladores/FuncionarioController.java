@@ -167,6 +167,42 @@ public class FuncionarioController implements Initializable {
         }
     }
     
+    @FXML
+    void cadastrarPassagem(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarPassagem.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void alterarPassagem(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarPassagem.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void listagemPassagens(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemPassagens.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
