@@ -27,7 +27,7 @@ public class AlterarMotoristaController{
        
     private final FachadaGerente fachadaGerente;
         
-       @FXML
+      @FXML
     private Label cpfMotorista;
 
     @FXML
@@ -52,9 +52,6 @@ public class AlterarMotoristaController{
     private TextField txtCidadeMotorista;
 
     @FXML
-    private TextField txtLogradouroMotorista;
-
-    @FXML
     private Label lagradouroMotorista;
 
     @FXML
@@ -76,6 +73,9 @@ public class AlterarMotoristaController{
     private Label bairroMotorista;
 
     @FXML
+    private TextField txtLagradouroMotorista;
+
+    @FXML
     private TextField txtRgMotorista;
 
     @FXML
@@ -85,7 +85,7 @@ public class AlterarMotoristaController{
     private Label erroTelefone;
 
     @FXML
-    private TextField txtCepMotorista;
+    private TextField txtCepMotorsta;
 
     @FXML
     private Label nomeMotorista;
@@ -144,8 +144,8 @@ public class AlterarMotoristaController{
         String rg = txtRgMotorista.getText();
         String telefone = txtTelefoneMotorista.getText();
         String cnh = txtCnhMotorista.getText();
-        String cep = txtCepMotorista.getText();
-        String logradouro = txtLogradouroMotorista.getText();
+        String cep = txtCepMotorsta.getText();
+        String logradouro = txtLagradouroMotorista.getText();
         String bairro = txtBairroMotorista.getText();
         String numero = txtNumeroMotorista.getText();
         String complemento = txtComplementoMotorista.getText();
@@ -207,8 +207,8 @@ public class AlterarMotoristaController{
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Motorista não encontrado");
         
-        String cep = txtCepMotorista.getText();
-        String logradouro = txtLogradouroMotorista.getText();
+        String cep = txtCepMotorsta.getText();
+        String logradouro = txtLagradouroMotorista.getText();
         String bairro = txtBairroMotorista.getText();
         String numero = txtNumeroMotorista.getText();
         String complemento = txtComplementoMotorista.getText();
