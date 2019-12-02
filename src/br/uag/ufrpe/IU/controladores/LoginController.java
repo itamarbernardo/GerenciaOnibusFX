@@ -79,8 +79,9 @@ public class LoginController {
         boolean egerente = true;
         boolean verifica = true;
 
-        if (gerente.getText() == "não") {
+        if (gerente.equals("não")) {
             egerente = false;
+        } else {
         }
 
         if (cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*")) {
