@@ -144,13 +144,11 @@ public class AlterarOnibusController implements Initializable {
             poltronasTotalReclinavel.add(19);
             poltronasReclinavel.add(20);
             
-            Motorista novoM = fachadaGerente.procurarMotorista(novoCNH);
-            
         
             try{
                 int novoP = Integer.parseInt(notoPoltronas);
                 
-                fachadaGerente.alterarOnibus(novoM, novaPlaca, novoP, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
+                fachadaGerente.alterarOnibus(novoCNH, novaPlaca, novoP, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
                 
                 alertaConfirmacao.show();
                 exit();
