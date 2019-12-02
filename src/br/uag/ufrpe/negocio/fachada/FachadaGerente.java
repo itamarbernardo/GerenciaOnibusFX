@@ -231,7 +231,10 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         funcionario.getEndereco().setCidade(cidade);
         funcionario.getEndereco().setEstado(estado);
     }
-
+ 
+    public Funcionario autenticaFuncionario(String senha){
+        return negocioFuncionario.autenticarFuncionario(senha);
+    }
 
     public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
         return negocioFuncionario.procurarFuncionario(cpf);
@@ -251,5 +254,90 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
     public List<Funcionario> listagemFuncionarios() {
         return negocioFuncionario.listagemFuncionarios();
     }
+    
+    public void adicionarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws FuncionarioNaoEncontradoException, OnibusNaoExisteException, OnibusJaExisteException{
+        Funcionario verificaMotorista;
+        verificaMotorista = procurarFuncionario(motorista.getCpf());
+        Onibus verificaOnibus;
+        verificaOnibus = procurarOnibus(placa);
+        
+        if(verificaMotorista != null){
+            
+            if(verificaOnibus != null){                
+                Onibus onibus = new Onibus(motorista, placa, totalPoltronas, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
+                negocioOnibus.adicionarOnibus(onibus);
+            }
+            
+            else{
+                throw new OnibusNaoExisteException();
+            }
+         }    
+            
+        else{
+            throw new FuncionarioNaoEncontradoException();
+            
+        }
+ 
+    }
+    
+    public Onibus procurarOnibus(String placa){
+        return negocioOnibus.procurarOnibus(placa);
+    }
+    
+    public void alterarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws OnibusNaoExisteException, FuncionarioNaoEncontradoException{
+        Onibus onibus = negocioOnibus.procurarOnibus(placa);
+        Funcionario verificaMotorista = negocioFuncionario.procurarFuncionario(motorista.getCpf());
+        
+        if(onibus != null){
+            
+            if(verificaMotorista != null){
+                onibus.setMotorista(motorista);
+                onibus.setPlaca(placa);
+                onibus.setTotalPoltronas(totalPoltronas);
+                onibus.setPoltronas(poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);                
+                onibus.inicializaPoltronas(poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
+            }
+            
+            else{
+                
+                throw new FuncionarioNaoEncontradoException();
+            }
+        }
+        else{
+            throw new OnibusNaoExisteException();
+        }
+        
+        
+    }
+       public boolean auntenticar(String cpf, String senha)  throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        if(funcionario == null){
+             throw new FuncionarioNaoEncontradoException();
+        }else{
+            if(funcionario.getSenha() == senha){
+                if(funcionario.eGerente() == true){
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
+    
+    
+    public void removerOnibus(String placa) throws OnibusNaoExisteException{
+        Onibus onibus = negocioOnibus.procurarOnibus(placa);
+        
+        if(onibus != null){
+            negocioOnibus.removerOnibus(placa);
+        }
+        else{
+            throw new OnibusNaoExisteException();
+        }
+    }
+    
+    public List<Onibus> listagemOnibus(){
+        return negocioOnibus.listagemOnibus();
+    }
+
 
 }

@@ -11,11 +11,11 @@ import br.uag.ufrpe.negocio.NegocioOnibus;
 import br.uag.ufrpe.negocio.NegocioPassageiro;
 import br.uag.ufrpe.negocio.NegocioPassagem;
 import br.uag.ufrpe.negocio.NegocioViagem;
+import br.uag.ufrpe.negocio.entidades.Funcionario;
 import br.uag.ufrpe.negocio.entidades.Passageiro;
 import br.uag.ufrpe.negocio.entidades.Passagem;
 import br.uag.ufrpe.negocio.entidades.Viagem;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
-import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
+import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
 import br.uag.ufrpe.negocio.excecoes.onibus.OnibusCheioException;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaEstaNaViagemException;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroJaExisteException;
@@ -23,6 +23,8 @@ import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoPertenceAViagemException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeDeAssentoException;
+import br.uag.ufrpe.negocio.excecoes.viagem.IndisponibilidadeTipoDePassagemException;
 import br.uag.ufrpe.negocio.excecoes.viagem.ViagemNaoExisteException;
 import java.util.List;
 import java.util.Map;
@@ -245,6 +247,8 @@ public class FachadaFuncionario {
         return negocioPassageiro.listagemPassageiros();
     }
     
+    
+    
     public int adicionarPassagem(Passageiro passageiro, double preco, boolean eDentroDoEstado, int codigoPoltrona, String tipoDeAssento, String tipoDePassagem,  boolean lanche, boolean criancaColo) throws PassageiroNaoExisteException, PassagemJaExisteException{
         Passageiro verificaPassageiro;
         verificaPassageiro = procurarPassageiro(passageiro.getCpf());
@@ -275,7 +279,7 @@ public class FachadaFuncionario {
         if(p != null){
                        
             if(passagem != null){
-                passagem.setPassageiro(p);
+                //passagem.setPassageiro(p);
                 passagem.setPreco(preco);
                 passagem.seteDentroDoEstado(eDentroDoEstado);
                 passagem.setCodigoPoltrona(codigoPoltrona);
@@ -291,7 +295,7 @@ public class FachadaFuncionario {
         }
         
         else{
-            throw new PassageiroNaoExisteException();
+          throw new PassageiroNaoExisteException();
         }       
        
     }
@@ -307,8 +311,22 @@ public class FachadaFuncionario {
             negocioPassagem.removerPassagem(codigoPassagem);
         }
         
-    }   
-
-
-
+    }
+     public boolean auntenticar(String cpf, String senha)  throws FuncionarioNaoEncontradoException{
+        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        if(funcionario == null){
+             throw new FuncionarioNaoEncontradoException();
+        }else{
+            if(funcionario.getSenha() == senha){
+                if(funcionario.eGerente() == true){
+                    return true; 
+                }
+            }
+        }
+        return false; 
+    }
+        
+    public List<Passagem> listagemPassagem() {
+        return negocioPassagem.listagemPassagem();
+    }
 }

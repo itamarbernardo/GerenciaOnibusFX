@@ -8,6 +8,7 @@ package br.uag.ufrpe.IU.controladores;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -116,7 +117,90 @@ public class FuncionarioController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    @FXML
+    void cadastrarPassageiro(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarPassageiro.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
+    @FXML
+    void procurarPassageiro(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarPassageiro.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void removerPassageiro(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaRemoverPassageiro.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void listagemPassageiros(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemPassageiros.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    void cadastrarPassagem(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaCadastrarPassagem.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void alterarPassagem(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaAlterarPassagem.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void listagemPassagens(ActionEvent event) {
+        paneTelas.getChildren().clear();            
+            
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaListagemPassagens.fxml"));
+            paneTelas.getChildren().addAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     @Override

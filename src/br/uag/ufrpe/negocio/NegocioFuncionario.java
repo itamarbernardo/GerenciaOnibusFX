@@ -38,7 +38,10 @@ public class NegocioFuncionario {
             repositorio.alterarFuncionario(funcionario);
         }
     }
-    
+    public Funcionario autenticarFuncionario(String senha){
+        return repositorio.autenticarFuncinario(senha);
+    }
+  
     public Funcionario procurarFuncionario(String cpf){
         return repositorio.procurarFuncionario(cpf);
     }

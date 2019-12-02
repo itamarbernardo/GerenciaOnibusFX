@@ -10,6 +10,7 @@ import br.uag.ufrpe.negocio.excecoes.passagem.PassagemJaExisteException;
 import br.uag.ufrpe.negocio.excecoes.passagem.PassagemNaoExisteException;
 import br.uag.ufrpe.dados.IRepositorioPassagem;
 import br.uag.ufrpe.dados.RepositorioPassagem;
+import java.util.List;
 
 
 /**
@@ -76,6 +77,9 @@ public class NegocioPassagem {
         
         throw new PassagemNaoExisteException();
         
+    }
+    public List<Passagem> listagemPassagem() {
+        return repositorio.listagemPassagem();
     }
   
 }
