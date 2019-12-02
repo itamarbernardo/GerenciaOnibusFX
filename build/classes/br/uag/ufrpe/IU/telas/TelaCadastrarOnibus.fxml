@@ -16,6 +16,7 @@
             <Font size="20.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <Label layoutX="186.0" layoutY="271.0" text="Seleção de Poltronas Especiais">
          <font>
             <Font size="16.0" />
@@ -30,6 +31,9 @@
       <TextField layoutX="61.0" layoutY="493.0" />
       <TextField layoutX="260.0" layoutY="493.0" />
       <Button layoutX="446.0" layoutY="590.0" mnemonicParsing="false" onAction="#cadastrarOnibus" text="Cadastrar">
+=======
+      <Button layoutX="337.0" layoutY="297.0" mnemonicParsing="false" onAction="#CadastrarOnibus" text="Cadastrar">
+>>>>>>> f4e0d6dd4996065db6361f6c021c1f65e7614bd0
          <font>
             <Font size="19.0" />
          </font>
@@ -53,5 +57,9 @@
             <TextField fx:id="motorista" GridPane.columnIndex="1" />
          </children>
       </GridPane>
+<<<<<<< HEAD
+=======
+      <Button layoutX="191.0" layoutY="304.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
+>>>>>>> f4e0d6dd4996065db6361f6c021c1f65e7614bd0
    </children>
 </AnchorPane>

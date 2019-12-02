@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.uag.ufrpe.IU.controladores;
 
 import br.uag.ufrpe.IU.GUIFuncionario;
@@ -11,7 +10,6 @@ import br.uag.ufrpe.negocio.entidades.Funcionario;
 import br.uag.ufrpe.negocio.excecoes.funcionario.FuncionarioNaoEncontradoException;
 import br.uag.ufrpe.negocio.fachada.FachadaFuncionario;
 import br.uag.ufrpe.negocio.fachada.FachadaGerente;
-import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -24,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -32,18 +31,17 @@ import javafx.stage.Stage;
  *
  * @author GABRIEL
  */
-public class LoginController  {
+public class LoginController {
+
     private FachadaGerente fachadaGerente;
-    private FachadaFuncionario fachadaFuncionario; 
-    
-    @FXML
-    private Label senha;
+    private FachadaFuncionario fachadaFuncionario;
+
 
     @FXML
     private TextField txtSenha;
 
     @FXML
-    private TextField txtLongin;
+    private TextField txtLogin;
 
     @FXML
     private RadioButton labelGerente;
@@ -58,58 +56,53 @@ public class LoginController  {
     private Label erroCpf;
 
     @FXML
-    private Label longin;
-
-    @FXML
     private Label erroSenha;
 
-     public LoginController(){
+    public LoginController() {
         fachadaGerente = FachadaGerente.getFachadaGerente();
         fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
-    }  
-  
+    }
 
     @FXML
-    private void entrar(ActionEvent event) throws FuncionarioNaoEncontradoException {
+    private void entrar(ActionEvent event) {
         Alert alertaErro = new Alert(Alert.AlertType.ERROR);
         alertaErro.setTitle("Erro");
         alertaErro.setHeaderText("Erro ao preencher os dados");
-        
+
         Alert alertaConfirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         alertaConfirmacao.setTitle("CONFIRMAÇÃO");
         alertaConfirmacao.setHeaderText("Autenticado!");
-        
-        String cpf = txtLongin.getText();
+
+        String cpf = txtLogin.getText();
         String senha = txtSenha.getText();
         RadioButton gerente = (RadioButton) grup.getSelectedToggle();
-        boolean egerente = true; 
-        boolean verifica = true; 
-        
-        if(gerente.getText() == "não"){
-             egerente = false; 
+        boolean egerente = true;
+        boolean verifica = true;
+
+        if (gerente.getText() == "não") {
+            egerente = false;
         }
-      
-         if(cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*")){
-            erroCpf.setText("Longin invalido");
+
+        if (cpf.length() < 11 || cpf.isEmpty() || !cpf.matches("[0-9]*")) {
+            erroCpf.setText("Login invalido");
             verifica = false;
         }
-          if(senha.length() < 3 || senha.isEmpty()){
+        if (senha.length() < 3 || senha.isEmpty()) {
             erroSenha.setText("Senha invalida ou muito curta");
             verifica = false;
         }
-          try{
-            if(cpf =="admin" && senha == "admin"){
-                 Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerente.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.resizableProperty().setValue(Boolean.FALSE);
-                    stage.setResizable(false);
-                    stage.setScene(scene);
-                    stage.setTitle("Tela Principal");
-                    stage.show();
-            }
-            if(egerente == true){    
-                if(fachadaGerente.auntenticar(cpf, senha) == true){
+        try {
+            if (cpf.equals("12345678910") && senha.equals("admin")) {
+                Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerente.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.resizableProperty().setValue(Boolean.FALSE);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.setTitle("Tela Principal");
+                stage.show();
+            } else if (egerente == true) {
+                if (fachadaGerente.auntenticar(cpf, senha) == true) {
                     Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaGerente.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
@@ -118,12 +111,12 @@ public class LoginController  {
                     stage.setScene(scene);
                     stage.setTitle("Tela Principal");
                     stage.show();
-                }else{
+                } else {
                     alertaErro.setContentText("Usuário não encontrada");
                     alertaErro.show();
-                }}
-            else{
-                 if(fachadaFuncionario.auntenticar(cpf, senha) == true){
+                }
+            } else {
+                if (fachadaFuncionario.auntenticar(cpf, senha) == true) {
                     Parent root = FXMLLoader.load(getClass().getResource("/br/uag/ufrpe/IU/telas/TelaFuncionario.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
@@ -131,17 +124,17 @@ public class LoginController  {
                     stage.setResizable(false);
                     stage.setScene(scene);
                     stage.setTitle("Tela Principal");
-                    stage.show();    
-                    } else{
+                    stage.show();
+                } else {
                     alertaErro.setContentText("Usuário não encontrada");
                     alertaErro.show();
-                 }  
-          }}catch (Exception ex) {
+                }
+            }
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
             erroCpf.setText("Entrada invalida");
-          }
-      
+        }
 
-}
+    }
 }

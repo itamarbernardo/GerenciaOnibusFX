@@ -274,7 +274,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
  
     }
     
-    public Onibus procurarOnibus(String placa){
+   public Onibus procurarOnibus(String placa){
         return negocioOnibus.procurarOnibus(placa);
     }
     
