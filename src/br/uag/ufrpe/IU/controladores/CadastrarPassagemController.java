@@ -15,7 +15,10 @@ import br.uag.ufrpe.negocio.NegocioPassageiro;
 import br.uag.ufrpe.negocio.entidades.Passageiro;
 import br.uag.ufrpe.negocio.entidades.Passagem;
 import br.uag.ufrpe.negocio.excecoes.passageiro.PassageiroNaoExisteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,8 +71,10 @@ public class CadastrarPassagemController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+     
+
+    }
         
-    }  
     
     public CadastrarPassagemController() {
         fachadaFuncionario = FachadaFuncionario.getFachadaFuncionario();
@@ -109,6 +114,12 @@ public class CadastrarPassagemController implements Initializable {
         // ------------------------
         
         String preco = PrecoPassagem.getText();
+        if(preco.isEmpty()){
+            alertaErro.setContentText("Erro! Campo preço de passagem vazio");
+            alertaErro.show();
+            verificaPassagem = false;
+        }
+        
         //preco.replaceAll(",", ".");
         double precoDouble = Double.parseDouble(preco);
         
@@ -234,7 +245,6 @@ public class CadastrarPassagemController implements Initializable {
     @FXML
     private void Voltar(ActionEvent event) {
     }
-
 
 }
 
