@@ -40,7 +40,7 @@ public class FachadaFuncionario {
     private NegocioViagem negocioViagem;
     private NegocioPassagem negocioPassagem;
     private NegocioPassageiro negocioPassageiro;
-    NegocioFuncionario negocioFuncionario;
+    private NegocioFuncionario negocioFuncionario;
     
     FachadaFuncionario() {
         this.negocioViagem = new NegocioViagem();

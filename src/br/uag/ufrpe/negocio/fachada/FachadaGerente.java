@@ -198,7 +198,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         Funcionario funcionario = new Funcionario(nomeCompleto, cpf, rg, telefone, senha, email, eGerente, endereco);
         
         if(procurarFuncionario(funcionario.getCpf()) == null){
-            negocioFuncionario.adicionarFuncionario(funcionario);    
+            getNegocioFuncionario().adicionarFuncionario(funcionario);    
         }
         else{
             throw new FuncionarioJaExisteException();   
@@ -208,12 +208,12 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
     }
     
     public void alterarFuncionario(String nomeCompleto, String cpf, String rg, String telefone, String senha, String email, boolean eGerente, String cep, String logradouro, String bairro, String numero, String complemento, String cidade, String estado) throws FuncionarioNaoEncontradoException{
-        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);        
+        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf);        
         if(funcionario == null){
             throw new FuncionarioNaoEncontradoException();
         }
         else{
-            negocioFuncionario.alterarFuncionario(funcionario);
+            getNegocioFuncionario().alterarFuncionario(funcionario);
         }
         
         funcionario.setNomeCompleto(nomeCompleto);
@@ -231,13 +231,9 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         funcionario.getEndereco().setCidade(cidade);
         funcionario.getEndereco().setEstado(estado);
     }
- 
-    public Funcionario autenticaFuncionario(String senha){
-        return negocioFuncionario.autenticarFuncionario(senha);
-    }
 
     public Funcionario procurarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
-        return negocioFuncionario.procurarFuncionario(cpf);
+        return getNegocioFuncionario().procurarFuncionario(cpf);
     }
 
     public void removerFuncionario(String cpf) throws FuncionarioNaoEncontradoException {
@@ -252,7 +248,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
     }
     
     public List<Funcionario> listagemFuncionarios() {
-        return negocioFuncionario.listagemFuncionarios();
+        return getNegocioFuncionario().listagemFuncionarios();
     }
     
     public void adicionarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws FuncionarioNaoEncontradoException, OnibusNaoExisteException, OnibusJaExisteException{
@@ -286,7 +282,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
     
     public void alterarOnibus(Motorista motorista, String placa, int totalPoltronas, List<Integer> poltronasObeso, List<Integer> poltronasTotalReclinavel, List<Integer> poltronasReclinavel) throws OnibusNaoExisteException, FuncionarioNaoEncontradoException{
         Onibus onibus = negocioOnibus.procurarOnibus(placa);
-        Funcionario verificaMotorista = negocioFuncionario.procurarFuncionario(motorista.getCpf());
+        Funcionario verificaMotorista = getNegocioFuncionario().procurarFuncionario(motorista.getCpf());
         
         if(onibus != null){
             
@@ -310,7 +306,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         
     }
        public boolean auntenticar(String cpf, String senha)  throws FuncionarioNaoEncontradoException{
-        Funcionario funcionario = negocioFuncionario.procurarFuncionario(cpf);
+        Funcionario funcionario = getNegocioFuncionario().procurarFuncionario(cpf);
         if(funcionario == null){
              throw new FuncionarioNaoEncontradoException();
         }else{
