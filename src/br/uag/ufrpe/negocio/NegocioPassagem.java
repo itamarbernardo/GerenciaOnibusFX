@@ -12,74 +12,69 @@ import br.uag.ufrpe.dados.IRepositorioPassagem;
 import br.uag.ufrpe.dados.RepositorioPassagem;
 import java.util.List;
 
-
 /**
  *
  * @author Emily Santos
  */
 public class NegocioPassagem {
-    
+
     private IRepositorioPassagem repositorio;
 
     public NegocioPassagem() {
         this.repositorio = new RepositorioPassagem();
     }
-    
+
     // ------------------------------ METODOS ----------------------------------
-    
-    public void adicionarPassagem(Passagem passagem) throws PassagemJaExisteException{
-        if(repositorio.procurarPassagem(passagem) == null){
+    public void adicionarPassagem(Passagem passagem) throws PassagemJaExisteException {
+        if (repositorio.procurarPassagem(passagem) == null) {
             repositorio.adicionarPassagem(passagem);
+        } else {
+            throw new PassagemJaExisteException();
         }
-        
-        throw new PassagemJaExisteException();
-        
     }
-    
-    public void alterarPassagem(Passagem passagem) throws PassagemNaoExisteException{
-        if(repositorio.procurarPassagem(passagem) != null){
+
+    public void alterarPassagem(Passagem passagem) throws PassagemNaoExisteException {
+        if (repositorio.procurarPassagem(passagem) != null) {
             repositorio.alterarPassagem(passagem);
+        } else {
+            throw new PassagemNaoExisteException();
         }
-        
-        throw new PassagemNaoExisteException();
-        
     }
-    
-    public Passagem procurarPassagem(int codigo){
-        if(repositorio.procurarPassagem(codigo) != null){
+
+    public Passagem procurarPassagem(int codigo) {
+        if (repositorio.procurarPassagem(codigo) != null) {
             return repositorio.procurarPassagem(codigo);
         }
-        
+
         return null;
     }
-    
-    public Passagem procurarPassagem(Passagem passagem){
-        if(repositorio.procurarPassagem(passagem) != null){
+
+    public Passagem procurarPassagem(Passagem passagem) {
+        if (repositorio.procurarPassagem(passagem) != null) {
             return repositorio.procurarPassagem(passagem);
         }
-        
+
         return null;
     }
-    
-    public void removerPassagem(Passagem passagem) throws PassagemNaoExisteException{
-        if(repositorio.procurarPassagem(passagem) != null){
+
+    public void removerPassagem(Passagem passagem) throws PassagemNaoExisteException {
+        if (repositorio.procurarPassagem(passagem) != null) {
             repositorio.removerPassagem(passagem);
+        } else {
+            throw new PassagemNaoExisteException();
         }
-        
-        throw new PassagemNaoExisteException();
-        
     }
-    
-    public void removerPassagem(int codigo) throws PassagemNaoExisteException{
-        if(repositorio.procurarPassagem(codigo) != null){
+
+    public void removerPassagem(int codigo) throws PassagemNaoExisteException {
+        if (repositorio.procurarPassagem(codigo) != null) {
             repositorio.removerPassagem(codigo);
+        } else {
+            throw new PassagemNaoExisteException();
         }
-        
-        throw new PassagemNaoExisteException();
-        
     }
+
     public List<Passagem> listagemPassagem() {
         return repositorio.listagemPassagem();
     }
-  
+
 }

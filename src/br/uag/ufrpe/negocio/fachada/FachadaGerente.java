@@ -257,7 +257,7 @@ public Motorista procurarMotorista(String numeroCarteiraMotorista) throws Motori
         
         if(verificaMotorista != null){
             
-            if(verificaOnibus != null){                
+            if(verificaOnibus == null){                
                 Onibus onibus = new Onibus(verificaMotorista, placa, totalPoltronas, poltronasObeso, poltronasTotalReclinavel, poltronasReclinavel);
                 negocioOnibus.adicionarOnibus(onibus);
             }
