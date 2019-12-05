@@ -23,9 +23,9 @@ public class NegocioOnibus {
     public void adicionarOnibus(Onibus onibus) throws OnibusJaExisteException {
         if (procurarOnibus(onibus.getPlaca()) == null) {
             repositorio.adicionarOnibus(onibus);
+        } else {
+            throw new OnibusJaExisteException();
         }
-        throw new OnibusJaExisteException();
-
     }
 
     public Onibus procurarOnibus(String placa) {
@@ -40,25 +40,25 @@ public class NegocioOnibus {
     public void alterarOnibus(Onibus onibus) throws OnibusNaoExisteException {
         if (repositorio.procurarOnibus(onibus.getPlaca()) != null) {
             repositorio.alterarOnibus(onibus);
+        } else {
+            throw new OnibusNaoExisteException();
         }
-        throw new OnibusNaoExisteException();
-
     }
 
     public void removerOnibus(Onibus onibus) throws OnibusNaoExisteException {
         if (repositorio.procurarOnibus(onibus.getPlaca()) != null) {
             repositorio.removerOnibus(onibus);
+        } else {
+            throw new OnibusNaoExisteException();
         }
-        throw new OnibusNaoExisteException();
-
     }
 
     public void removerOnibus(String placa) throws OnibusNaoExisteException {
         if (repositorio.procurarOnibus(placa) != null) {
             repositorio.removerOnibus(placa);
+        } else {
+            throw new OnibusNaoExisteException();
         }
-        throw new OnibusNaoExisteException();
-
     }
 
     public List<Onibus> listagemOnibus() {
